@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet"
+        href="https://todevops.github.io/css/frameworks.css" />
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet" href="https://todevops.github.io/css/github.css" />
+    <meta name="viewport" content="width=device-width">
+
+    <title>CentOS Oracle 12c 安装指南 - ToDevOps</title>
+
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://todevops.github.io/img/favicon.ico">
+    <meta name="theme-color" content="#1e2327">
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-456-789', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body class="env-production emoji-size-boost page-responsive page-profile">
+  <div class="position-relative js-header-wrapper ">
+    <span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar">
+        <span class="progress-pjax-loader-bar top-0 left-0" style="width: 0%;"></span>
+    </span>
+    <header class="Header js-details-container Details flex-wrap flex-lg-nowrap p-responsive" role="banner">
+        <div class="Header-item d-none d-lg-flex">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+        <div
+            class="Header-item Header-item--full flex-column flex-lg-row width-full flex-order-2 flex-lg-order-none mr-0 mr-lg-3 mt-3 mt-lg-0 Details-content--hidden">
+            <div class="header-search flex-self-stretch flex-lg-self-auto mr-0 mr-lg-3 mb-3 mb-lg-0 scoped-search site-scoped-search js-site-search position-relative js-jump-to"
+                role="combobox" aria-owns="jump-to-results" aria-label="Search or jump to" aria-haspopup="listbox"
+                aria-expanded="false">
+                <div class="position-relative">
+                </div>
+            </div>
+        </div>
+        <div class="Header-item Header-item--full flex-justify-center d-lg-none position-relative"
+            style="margin-right: auto;">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+    </header>
+</div>
+
+<div id="start-of-content" class="show-on-focus"></div>
+<div id="js-flash-container">
+</div>
+  
+<div class="application-main " data-commit-hovercards-enabled="">
+    <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode" class="">
+        <main id="js-repo-pjax-container" data-pjax-container="">
+            <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav pt-0 pt-lg-4 ">
+                <div class="repohead-details-container clearfix container-lg p-responsive d-none d-lg-block">
+                    <div class="mb-3 d-flex">
+                        <h1 class="public css-truncate float-none flex-auto width-fit pl-0">
+                            <a class="avatar mr-1" href="https://todevops.github.io/about/">
+                            
+
+                                <img
+                                    src="https://todevops.github.io/images/avatar.png" width="26" height="26">
+                            
+                            </a>
+                            <span class="author"><a
+                                    href="https://todevops.github.io/">JeremyTowne</a></span>
+                            <span class="path-divider">/</span>
+                            <strong itemprop="name" class="css-truncate-target" style="max-width: 410px"><a
+                                    href="https://todevops.github.io/posts/centos_install_oracle12c/">CentOS Oracle 12c 安装指南</a></strong>
+
+                            <div class="d-block text-small text-gray">
+                                Created <time-ago datetime="2018-12-14" class="no-wrap"
+                                    title="Created at 2018/12/14">
+                                    2018-12-14</time-ago>
+                                <span class="file-info-divider"></span>
+                                Modifyed <time-ago datetime="2018-12-14" class="no-wrap"
+                                    title="Modifyed  at 2018/12/14">
+                                    2018-12-14</time-ago>
+                            </div>
+                        </h1>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="container-lg clearfix new-discussion-timeline experiment-repo-nav  p-responsive">
+                <div class="repository-content ">
+                    <div class="Box mt-3 position-relative">
+                        <div class="Box-header py-2 d-flex flex-column flex-shrink-0 flex-md-row flex-md-items-center">
+                            <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                                714 Words
+                                
+                            </div>
+                        </div>
+
+                        <div id="readme" class="Box-body readme blob instapaper_body js-code-block-container">
+                            <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"><p>CentOS Oracle 12c 安装指南</p>
+<h2 id="1-优化安装必要的工具">1. 优化、安装必要的工具</h2>
+<pre><code>[root@oracle12c ~]$ yum -y install unzip vim lrzsz
+[root@oracle12c ~]$ setenforce 0
+[root@oracle12c ~]$ sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+[root@oracle12c ~]$ reboot
+[root@oracle12c ~]$ sed -i 's/^GSSAPIAuthentication yes$/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+[root@oracle12c ~]$ sed -i 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
+[root@oracle12c ~]$ service sshd restart
+</code></pre><h2 id="2-安装依赖">2. 安装依赖</h2>
+<pre><code>[root@oracle12c ~]$ yum -y install binutils compat-libcap1 compat-libstdc++-33 compat-libstdc++-33*.i686 elfutils-libelf-devel gcc gcc-c++ glibc*.i686 glibc glibc-devel glibc-devel*.i686 ksh libgcc*.i686 libgcc libstdc++ libstdc++*.i686 libstdc++-devel libstdc++-devel*.i686 libaio libaio*.i686 libaio-devel libaio-devel*.i686 make sysstat unixODBC unixODBC*.i686 unixODBC-devel unixODBC-devel*.i686 libXp
+</code></pre><h2 id="3-建立用户和组">3. 建立用户和组</h2>
+<pre><code>[root@oracle12c ~]$ groupadd oinstall
+[root@oracle12c ~]$ groupadd dba
+[root@oracle12c ~]$ groupadd oper
+[root@oracle12c ~]$ useradd -g oinstall -G dba,oper oracle
+[root@oracle12c ~]$ echo oracle | passwd --stdin oracle
+</code></pre><h2 id="4-创建安装备份目录">4. 创建安装、备份目录</h2>
+<pre><code>[root@oracle12c ~]$ mkdir -p /u01/app/oracle/product/12.2.0
+[root@oracle12c ~]$ chown -R oracle:oinstall /u01
+</code></pre><h2 id="5-更改共享内存">5. 更改共享内存</h2>
+<pre><code>[root@oracle12c ~]$ echo &quot;shmfs /dev/shm tmpfs size=12g 0&quot; &gt;&gt; /etc/fstab
+</code></pre><h2 id="6-修改内核参数">6. 修改内核参数</h2>
+<pre><code>[root@oracle12c ~]$ vim /etc/sysctl.conf
+</code></pre><pre><code>fs.file-max = 6815744
+kernel.sem = 250 32000 100 128
+kernel.shmmni = 4096
+kernel.shmall = 4294967296
+kernel.shmmax = 4398046511104
+kernel.panic_on_oops = 1
+net.core.rmem_default = 262144
+net.core.rmem_max = 4194304
+net.core.wmem_default = 262144
+net.core.wmem_max = 1048576
+net.ipv4.conf.all.rp_filter = 2
+net.ipv4.conf.default.rp_filter = 2
+fs.aio-max-nr = 1048576
+net.ipv4.ip_local_port_range = 9000 65500
+</code></pre><pre><code>[root@oracle12c ~]$ sysctl -p
+</code></pre><h2 id="7-改文件限制">7. 改文件限制</h2>
+<pre><code>[root@oracle12c ~]$ vim /etc/security/limits.conf
+</code></pre><pre><code>oracle soft nproc 2047
+oracle hard nproc 16384
+oracle soft nofile 1024
+oracle hard nofile 65536
+oracle soft stack 10240
+</code></pre><h2 id="8-修改登陆配置文件">8. 修改登陆配置文件</h2>
+<pre><code>[root@oracle12c ~]$ vim /etc/pam.d/login
+</code></pre><pre><code>session required pam_limits.so
+</code></pre><h2 id="9-修改-ulimit">9. 修改 ulimit</h2>
+<pre><code>[root@oracle12c ~]$ vim /etc/profile
+</code></pre><pre><code>if [ $USER = &quot;oracle&quot; ]; then
+    if [ $SHELL = &quot;/bin/ksh&quot; ]; then
+        ulimit -p 16384
+        ulimit -n 65536a
+    else
+        ulimit -u 16384 -n 65536
+    fi
+fi
+</code></pre><h2 id="10-修改环境变量">10. 修改环境变量</h2>
+<pre><code>[root@oracle12c ~]$ vim ~/.bash_profile
+</code></pre><pre><code>PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ORACLE_HOME/bin
+ORACLE_BASE=/u01/app/oracle
+ORACLE_HOME=$ORACLE_BASE/product/12.2.0
+ORACLE_SID=orcl
+export ORACLE_BASE ORACLE_HOME ORACLE_SID
+export NLS_LANG=&quot;AMERICAN_AMERICA.UTF8&quot;
+export PATH
+</code></pre><h2 id="11-修改-hosts-文件">11. 修改 hosts 文件</h2>
+<pre><code>[root@oracle12c ~]$ vim /etc/hosts
+</code></pre><pre><code>[ipaddr] oracle12c
+</code></pre><h2 id="12-上传安装包-linuxx64_12201_databasezip">12. 上传安装包 linuxx64_12201_database.zip</h2>
+<pre><code>[oracle@oracle12c ~]$ rz
+</code></pre><h2 id="13-静默安装数据库软件">13. 静默安装数据库软件</h2>
+<pre><code>[oracle@oracle12c ~]$ cd database
+[oracle@oracle12c database]$ ./runInstaller  -silent -ignoreSysPrereqs -ignorePrereq -responseFile /home/oracle/database/response/db_install.rsp
+</code></pre><p>/home/oracle/database/response/db_install.rsp</p>
+<pre><code>oracle.install.responseFileVersion=/oracle/install/rspfmt_dbinstall_response_schema_v12.2.0
+oracle.install.option=INSTALL_DB_SWONLY
+UNIX_GROUP_NAME=dba
+INVENTORY_LOCATION=/u01/app/oracle/oraInventory
+ORACLE_HOME=/u01/app/oracle/product/12.2.0
+ORACLE_BASE=/u01/app/oracle
+oracle.install.db.InstallEdition=EE
+oracle.install.db.OSDBA_GROUP=dba
+oracle.install.db.OSOPER_GROUP=dba
+oracle.install.db.OSBACKUPDBA_GROUP=dba
+oracle.install.db.OSDGDBA_GROUP=dba
+oracle.install.db.OSKMDBA_GROUP=dba
+oracle.install.db.OSRACDBA_GROUP=dba
+oracle.install.db.CLUSTER_NODES=
+oracle.install.db.isRACOneInstall=false
+SECURITY_UPDATES_VIA_MYORACLESUPPORT=false
+DECLINE_SECURITY_UPDATES=true
+</code></pre><h2 id="14-建立数据库">14. 建立数据库</h2>
+<pre><code>[oracle@oracle12c ~]$ $ORACLE_HOME/bin/dbca -silent -createDatabase -templateName General_Purpose.dbc -gdbname orcl -sid orcl -responseFile NO_VALUE -characterSet AL32UTF8 -memoryPercentage 50 -emConfiguration LOCAL
+</code></pre><p>root 用户下执行以下命令</p>
+<pre><code>[root@oracle12c ~]$ /oracle/oraInventory/orainstRoot.sh
+[root@oracle12c ~]$ /oracle/product/12.2.0/root.sh
+</code></pre><h2 id="15-修改参数">15. 修改参数</h2>
+<pre><code>[oracle@oracle12c ~]$ sqlplus / as sysdba
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> sga_target<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> pga_aggregate_target<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> db_files<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> memory_max_target<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span><span style="color:#66d9ef">g</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> memory_target<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span><span style="color:#66d9ef">g</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> LOG_ARCHIVE_DEST_1<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;LOCATION=/backup/arch&#39;</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">SYSTEM</span> <span style="color:#66d9ef">set</span> db_recovery_file_dest_size<span style="color:#f92672">=</span><span style="color:#ae81ff">4096</span>M <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> undo_retention<span style="color:#f92672">=</span><span style="color:#ae81ff">3600</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> processes<span style="color:#f92672">=</span><span style="color:#ae81ff">6000</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> sessions<span style="color:#f92672">=</span><span style="color:#ae81ff">8000</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> open_cursors<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span><span style="color:#66d9ef">both</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">create</span> pfile<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/tmp/pfile01.ora&#39;</span> <span style="color:#66d9ef">from</span> spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> filesystemio_options<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;asynch&#39;</span> <span style="color:#66d9ef">scope</span><span style="color:#f92672">=</span>spfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">set</span> disk_asynch_io<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span> <span style="color:#66d9ef">SCOPE</span><span style="color:#f92672">=</span>SPFILE;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">create</span> directory expdp_dir <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;/backup/expdp&#39;</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">write</span>,<span style="color:#66d9ef">read</span> <span style="color:#66d9ef">on</span> directory expdp_dir <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">public</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">add</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">4</span> <span style="color:#e6db74">&#39;/u01/app/oracle/oradata/orcl/redo04.log&#39;</span> <span style="color:#66d9ef">size</span> <span style="color:#ae81ff">1</span><span style="color:#66d9ef">G</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">add</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">5</span> <span style="color:#e6db74">&#39;/u01/app/oracle/oradata/orcl/redo05.log&#39;</span> <span style="color:#66d9ef">size</span> <span style="color:#ae81ff">1</span><span style="color:#66d9ef">G</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">add</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">6</span> <span style="color:#e6db74">&#39;/u01/app/oracle/oradata/orcl/redo06.log&#39;</span> <span style="color:#66d9ef">size</span> <span style="color:#ae81ff">1</span><span style="color:#66d9ef">G</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> switch logfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> switch logfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> switch logfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">checkpoint</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">drop</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">1</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">drop</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">2</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">drop</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">3</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">host</span> rm <span style="color:#f92672">-</span>rf <span style="color:#f92672">/</span>u01<span style="color:#f92672">/</span>app<span style="color:#f92672">/</span>oracle<span style="color:#f92672">/</span>oradata<span style="color:#f92672">/</span>orcl<span style="color:#f92672">/</span>redo0[<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>].log
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">add</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">1</span> <span style="color:#e6db74">&#39;/u01/app/oracle/oradata/orcl/redo01.log&#39;</span> <span style="color:#66d9ef">size</span>  <span style="color:#ae81ff">1</span><span style="color:#66d9ef">G</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">add</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">2</span> <span style="color:#e6db74">&#39;/u01/app/oracle/oradata/orcl/redo02.log&#39;</span> <span style="color:#66d9ef">size</span>  <span style="color:#ae81ff">1</span><span style="color:#66d9ef">G</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">add</span> logfile <span style="color:#66d9ef">group</span> <span style="color:#ae81ff">3</span> <span style="color:#e6db74">&#39;/u01/app/oracle/oradata/orcl/redo03.log&#39;</span> <span style="color:#66d9ef">size</span>  <span style="color:#ae81ff">1</span><span style="color:#66d9ef">G</span>; 
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> switch logfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> switch logfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> switch logfile;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">system</span> <span style="color:#66d9ef">checkpoint</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> shutdown <span style="color:#66d9ef">immediate</span>
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> startup mount
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> archivelog;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">open</span>;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">alter</span> profile <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">limit</span> FAILED_LOGIN_ATTEMPTS unlimited;
+<span style="color:#66d9ef">SQL</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">create</span> pfile<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/tmp/pfile02.ora&#39;</span> <span style="color:#66d9ef">from</span> spfile;
+</code></pre></div><h2 id="16-修改-oracle-服务启动配置">16. 修改 Oracle 服务启动配置</h2>
+<pre><code>[root@oracle12c ~]$ vim /etc/oratab
+</code></pre><pre><code>orcl:/u01/app/oracle/product/12.2.0:Y
+</code></pre></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+  <div class="footer container-lg width-full p-responsive" role="contentinfo">
+    <div
+        class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+            <li class="mr-3 mr-lg-0">&copy;2019&nbsp;<b><a href="mailto: jeremytowne@163.com">JeremyTowne</a></b>
+            </li>
+        </ul>
+
+        <a aria-label="Homepage" title="ToDevOps" class="footer-octicon d-none d-lg-block mx-lg-4"
+            href="https://todevops.github.io/">
+            <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24"
+                aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+        </a>
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+        </ul>
+    </div>
+    <div class="d-flex flex-justify-center pb-6">
+        <span class="f6 text-gray-light"></span>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+    type="application/javascript" src="https://todevops.github.io/js/frameworks.js"></script>
+
+<script crossorigin="anonymous" async="async"
+    type="application/javascript" src="https://todevops.github.io/js/github-bootstrap.js"></script>
+<script>
+    let classs = ['pinned-item-desc', 'text-gray', 'text-small', 'd-block', 'mt-2', 'mb-3'];
+    const pinned_posts = document.getElementsByName('pinned-post');
+    for (let i = 0; i < pinned_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = pinned_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+    classs = [ 'd-inline-block', 'text-gray', 'mb-2', 'pr-4'];
+    const posts_posts = document.getElementsByName('posts-post');
+    for (let i = 0; i < posts_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = posts_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

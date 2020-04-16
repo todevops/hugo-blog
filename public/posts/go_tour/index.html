@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet"
+        href="https://todevops.github.io/css/frameworks.css" />
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet" href="https://todevops.github.io/css/github.css" />
+    <meta name="viewport" content="width=device-width">
+
+    <title>Go Tour 练习 - ToDevOps</title>
+
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://todevops.github.io/img/favicon.ico">
+    <meta name="theme-color" content="#1e2327">
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-456-789', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body class="env-production emoji-size-boost page-responsive page-profile">
+  <div class="position-relative js-header-wrapper ">
+    <span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar">
+        <span class="progress-pjax-loader-bar top-0 left-0" style="width: 0%;"></span>
+    </span>
+    <header class="Header js-details-container Details flex-wrap flex-lg-nowrap p-responsive" role="banner">
+        <div class="Header-item d-none d-lg-flex">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+        <div
+            class="Header-item Header-item--full flex-column flex-lg-row width-full flex-order-2 flex-lg-order-none mr-0 mr-lg-3 mt-3 mt-lg-0 Details-content--hidden">
+            <div class="header-search flex-self-stretch flex-lg-self-auto mr-0 mr-lg-3 mb-3 mb-lg-0 scoped-search site-scoped-search js-site-search position-relative js-jump-to"
+                role="combobox" aria-owns="jump-to-results" aria-label="Search or jump to" aria-haspopup="listbox"
+                aria-expanded="false">
+                <div class="position-relative">
+                </div>
+            </div>
+        </div>
+        <div class="Header-item Header-item--full flex-justify-center d-lg-none position-relative"
+            style="margin-right: auto;">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+    </header>
+</div>
+
+<div id="start-of-content" class="show-on-focus"></div>
+<div id="js-flash-container">
+</div>
+  
+<div class="application-main " data-commit-hovercards-enabled="">
+    <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode" class="">
+        <main id="js-repo-pjax-container" data-pjax-container="">
+            <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav pt-0 pt-lg-4 ">
+                <div class="repohead-details-container clearfix container-lg p-responsive d-none d-lg-block">
+                    <div class="mb-3 d-flex">
+                        <h1 class="public css-truncate float-none flex-auto width-fit pl-0">
+                            <a class="avatar mr-1" href="https://todevops.github.io/about/">
+                            
+
+                                <img
+                                    src="https://todevops.github.io/images/avatar.png" width="26" height="26">
+                            
+                            </a>
+                            <span class="author"><a
+                                    href="https://todevops.github.io/">JeremyTowne</a></span>
+                            <span class="path-divider">/</span>
+                            <strong itemprop="name" class="css-truncate-target" style="max-width: 410px"><a
+                                    href="https://todevops.github.io/posts/go_tour/">Go Tour 练习</a></strong>
+
+                            <div class="d-block text-small text-gray">
+                                Created <time-ago datetime="2019-12-15" class="no-wrap"
+                                    title="Created at 2019/12/15">
+                                    2019-12-15</time-ago>
+                                <span class="file-info-divider"></span>
+                                Modifyed <time-ago datetime="2019-12-15" class="no-wrap"
+                                    title="Modifyed  at 2019/12/15">
+                                    2019-12-15</time-ago>
+                            </div>
+                        </h1>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="container-lg clearfix new-discussion-timeline experiment-repo-nav  p-responsive">
+                <div class="repository-content ">
+                    <div class="Box mt-3 position-relative">
+                        <div class="Box-header py-2 d-flex flex-column flex-shrink-0 flex-md-row flex-md-items-center">
+                            <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                                2635 Words
+                                
+                            </div>
+                        </div>
+
+                        <div id="readme" class="Box-body readme blob instapaper_body js-code-block-container">
+                            <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"><p>Go 指南练习，题解</p>
+<h2 id="练习-1循环与函数httpstourgo-zhorgflowcontrol8">练习 1：<a href="https://tour.go-zh.org/flowcontrol/8">循环与函数</a></h2>
+<p>为了练习函数与循环，我们来实现一个平方根函数：用牛顿法实现平方根函数。<br>
+计算机通常使用循环来计算 x 的平方根。从某个猜测的值 z 开始，我们可以根据 z² 与 x 的近似度来调整 z，产生一个更好的猜测：<br>
+<code>z -= (z*z - x) / (2*z)</code><br>
+重复调整的过程，猜测的结果会越来越精确，得到的答案也会尽可能接近实际的平方根。<br>
+在提供的 func Sqrt 中实现它。无论输入是什么，对 z 的一个恰当的猜测为 1。 要开始，请重复计算 10 次并随之打印每次的 z 值。观察对于不同的值 <code>x（1、2、3 ...）</code>， 你得到的答案是如何逼近结果的，猜测提升的速度有多快。<br>
+提示：用类型转换或浮点数语法来声明并初始化一个浮点数值：<br>
+<code>z := 1.0</code><br>
+<code>z := float64(1)</code><br>
+然后，修改循环条件，使得当值停止改变（或改变非常小）的时候退出循环。观察迭代次数大于还是小于 10。 尝试改变 z 的初始猜测，如 x 或 x/2。你的函数结果与标准库中的 math.Sqrt 接近吗？<br>
+（<em>注：</em> 如果你对该算法的细节感兴趣，上面的 <code>z² − x</code> 是 <code>z²</code> 到它所要到达的值（即 x）的距离， 除以的 2z 为 z² 的导数，我们通过 z² 的变化速度来改变 z 的调整量。 这种通用方法叫做牛顿法。 它对很多函数，特别是平方根而言非常有效。）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Sqrt</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Sqrt</span>(<span style="color:#ae81ff">2</span>))
+}
+</code></pre></div><h3 id="实现">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;math&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Sqrt</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+	<span style="color:#a6e22e">z</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1.0</span>	<span style="color:#75715e">// 初始化z
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">temp</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0.0</span>	<span style="color:#75715e">// 初始化temp，用于临时存放结果
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> {
+		<span style="color:#a6e22e">z</span> = <span style="color:#a6e22e">z</span> <span style="color:#f92672">-</span> (<span style="color:#a6e22e">z</span><span style="color:#f92672">*</span><span style="color:#a6e22e">z</span><span style="color:#f92672">-</span><span style="color:#a6e22e">x</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">z</span>)	<span style="color:#75715e">// 定义牛顿法公式求出新的z值
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">z</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Abs</span>(<span style="color:#a6e22e">z</span><span style="color:#f92672">-</span><span style="color:#a6e22e">temp</span>) &lt; <span style="color:#ae81ff">0.000000000000001</span> {	<span style="color:#75715e">// 判断z是否达到精度
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">break</span>
+		} <span style="color:#66d9ef">else</span> {
+			<span style="color:#a6e22e">temp</span> = <span style="color:#a6e22e">z</span>	<span style="color:#75715e">// 临时存放计算得出的z
+</span><span style="color:#75715e"></span>		}
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">z</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;牛顿法:&#34;</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Sqrt</span>(<span style="color:#ae81ff">3</span>))
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;math.Sqrt:&#34;</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Sqrt</span>(<span style="color:#ae81ff">3</span>))
+}
+
+</code></pre></div><h3 id="结果">结果</h3>
+<pre><code>牛顿法:
+2
+1.75
+1.7321428571428572
+1.7320508100147276
+1.7320508075688772
+1.7320508075688774
+1.7320508075688774
+math.Sqrt:
+1.7320508075688772
+</code></pre><h2 id="练习-2切片httpstourgo-zhorgmoretypes18">练习 2：<a href="https://tour.go-zh.org/moretypes/18">切片</a></h2>
+<p>实现 Pic。它应当返回一个长度为 dy 的切片，其中每个元素是一个长度为 dx，元素类型为 uint8 的切片。当你运行此程序时，它会将每个整数解释为灰度值（好吧，其实是蓝度值）并显示它所对应的图像。</p>
+<p>图像的选择由你来定。几个有趣的函数包括 (x+y)/2, x<em>y, x^y, x</em>log(y) 和 x%(y+1)。</p>
+<p>（提示：需要使用循环来分配 [][]uint8 中的每个 []uint8；请使用 uint8(intValue) 在类型之间转换；你可能会用到 math 包中的函数。）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;golang.org/x/tour/pic&#34;</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Pic</span>(<span style="color:#a6e22e">dx</span>, <span style="color:#a6e22e">dy</span> <span style="color:#66d9ef">int</span>) [][]<span style="color:#66d9ef">uint8</span> {
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">Show</span>(<span style="color:#a6e22e">Pic</span>)
+}
+
+</code></pre></div><h3 id="实现-1">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;golang.org/x/tour/pic&#34;</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Pic</span>(<span style="color:#a6e22e">dx</span>, <span style="color:#a6e22e">dy</span> <span style="color:#66d9ef">int</span>) [][]<span style="color:#66d9ef">uint8</span> {
+	<span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> make([][]<span style="color:#66d9ef">uint8</span>, <span style="color:#a6e22e">dy</span>)	<span style="color:#75715e">// make 一个长度为 dy 的二维数组切片
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">a</span> {	<span style="color:#75715e">// index, value := range a，x 为数组索引
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">uint8</span>, <span style="color:#a6e22e">dx</span>)	<span style="color:#75715e">// make 一个长度为 dx 的一维数组切片
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">b</span> {	<span style="color:#75715e">// y 为数组索引
+</span><span style="color:#75715e"></span>			<span style="color:#a6e22e">b</span>[<span style="color:#a6e22e">y</span>] = uint8(<span style="color:#a6e22e">x</span> <span style="color:#f92672">%</span> (<span style="color:#a6e22e">y</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))	<span style="color:#75715e">// 修改数组 b 对应索引位置的值
+</span><span style="color:#75715e"></span>		}
+		<span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">x</span>] = <span style="color:#a6e22e">b</span>	<span style="color:#75715e">// 修改数组 a 对应索引位置的值
+</span><span style="color:#75715e"></span>	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">Show</span>(<span style="color:#a6e22e">Pic</span>)
+}
+
+</code></pre></div><h2 id="练习-3映射httpstourgo-zhorgmoretypes23">练习 3：<a href="https://tour.go-zh.org/moretypes/23">映射</a></h2>
+<p>实现 WordCount。它应当返回一个映射，其中包含字符串 s 中每个“单词”的个数。函数 wc.Test 会对此函数执行一系列测试用例，并输出成功还是失败。<br>
+你会发现 strings.Fields 很有帮助。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;golang.org/x/tour/wc&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WordCount</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">int</span>{<span style="color:#e6db74">&#34;x&#34;</span>: <span style="color:#ae81ff">1</span>}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">wc</span>.<span style="color:#a6e22e">Test</span>(<span style="color:#a6e22e">WordCount</span>)
+}
+
+</code></pre></div><h3 id="实现-2">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+
+	<span style="color:#e6db74">&#34;golang.org/x/tour/wc&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WordCount</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Fields</span>(<span style="color:#a6e22e">s</span>)	<span style="color:#75715e">// 使用 strings.Fields 将字符串分割成数组
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">map_s</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">int</span>)	<span style="color:#75715e">// 映射单词和出现次数
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">a</span> {	<span style="color:#75715e">// 遍历 a 的值
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">map_s</span>[<span style="color:#a6e22e">v</span>]	<span style="color:#75715e">// 获取状态值
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> {	<span style="color:#75715e">// 判断map中是否存在当前字符串为下标的值
+</span><span style="color:#75715e"></span>			<span style="color:#a6e22e">map_s</span>[<span style="color:#a6e22e">v</span>]<span style="color:#f92672">++</span>	<span style="color:#75715e">// 有则出现次数+1
+</span><span style="color:#75715e"></span>		} <span style="color:#66d9ef">else</span> {
+			<span style="color:#a6e22e">map_s</span>[<span style="color:#a6e22e">v</span>] = <span style="color:#ae81ff">1</span>	<span style="color:#75715e">// 无则=1
+</span><span style="color:#75715e"></span>		}
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">map_s</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">wc</span>.<span style="color:#a6e22e">Test</span>(<span style="color:#a6e22e">WordCount</span>)
+}
+
+</code></pre></div><h3 id="结果-1">结果</h3>
+<pre><code>PASS
+ f(&quot;I am learning Go!&quot;) = 
+  map[string]int{&quot;Go!&quot;:1, &quot;I&quot;:1, &quot;am&quot;:1, &quot;learning&quot;:1}
+PASS
+ f(&quot;The quick brown fox jumped over the lazy dog.&quot;) = 
+  map[string]int{&quot;The&quot;:1, &quot;brown&quot;:1, &quot;dog.&quot;:1, &quot;fox&quot;:1, &quot;jumped&quot;:1, &quot;lazy&quot;:1, &quot;over&quot;:1, &quot;quick&quot;:1, &quot;the&quot;:1}
+PASS
+ f(&quot;I ate a donut. Then I ate another donut.&quot;) = 
+  map[string]int{&quot;I&quot;:2, &quot;Then&quot;:1, &quot;a&quot;:1, &quot;another&quot;:1, &quot;ate&quot;:2, &quot;donut.&quot;:2}
+PASS
+ f(&quot;A man a plan a canal panama.&quot;) = 
+  map[string]int{&quot;A&quot;:1, &quot;a&quot;:2, &quot;canal&quot;:1, &quot;man&quot;:1, &quot;panama.&quot;:1, &quot;plan&quot;:1}
+</code></pre><h2 id="练习-4斐波纳契闭包httpstourgo-zhorgmoretypes26">练习 4：<a href="https://tour.go-zh.org/moretypes/26">斐波纳契闭包</a></h2>
+<p>实现一个 <code>fibonacci</code> 函数，它返回一个函数（闭包），该闭包返回一个斐波纳契数列 <code>(0, 1, 1, 2, 3, 5, ...)</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#75715e">// 返回一个“返回int的函数”
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibonacci</span>() <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fibonacci</span>()
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">f</span>())
+	}
+}
+
+</code></pre></div><h3 id="实现-3">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#75715e">// 返回一个“返回int的函数”
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibonacci</span>() <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
+		<span style="color:#a6e22e">temp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">a</span>
+		<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> = <span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">a</span><span style="color:#f92672">+</span><span style="color:#a6e22e">b</span>
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">temp</span>
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fibonacci</span>()
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">f</span>())
+	}
+}
+
+</code></pre></div><h3 id="结果-2">结果</h3>
+<pre><code>0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+</code></pre><h2 id="练习-5-stringerhttpstourgo-zhorgmethods18">练习 5： <a href="https://tour.go-zh.org/methods/18">Stringer</a></h2>
+<ol>
+<li>通过让 <code>IPAddr</code> 类型实现 <code>fmt.Stringer</code> 来打印点号分隔的地址。</li>
+</ol>
+<blockquote>
+<p>例如，<code>IPAddr{1, 2, 3, 4}</code> 应当打印为 <code>&quot;1.2.3.4&quot;</code>。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IPAddr</span> [<span style="color:#ae81ff">4</span>]<span style="color:#66d9ef">byte</span>
+
+<span style="color:#75715e">// TODO: 给 IPAddr 添加一个 &#34;String() string&#34; 方法
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">hosts</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#a6e22e">IPAddr</span>{
+		<span style="color:#e6db74">&#34;loopback&#34;</span>:  {<span style="color:#ae81ff">127</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>},
+		<span style="color:#e6db74">&#34;googleDNS&#34;</span>: {<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>},
+	}
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">ip</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">hosts</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v: %v\n&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">ip</span>)
+	}
+}
+
+</code></pre></div><h3 id="实现-4">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IPAddr</span> [<span style="color:#ae81ff">4</span>]<span style="color:#66d9ef">byte</span>
+
+<span style="color:#75715e">// TODO: 给 IPAddr 添加一个 &#34;String() string&#34; 方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">ip</span> <span style="color:#a6e22e">IPAddr</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%v.%v.%v.%v&#34;</span>, <span style="color:#a6e22e">ip</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">ip</span>[<span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">ip</span>[<span style="color:#ae81ff">2</span>], <span style="color:#a6e22e">ip</span>[<span style="color:#ae81ff">3</span>])
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">hosts</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#a6e22e">IPAddr</span>{
+		<span style="color:#e6db74">&#34;loopback&#34;</span>:  {<span style="color:#ae81ff">127</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>},
+		<span style="color:#e6db74">&#34;googleDNS&#34;</span>: {<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>},
+	}
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">ip</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">hosts</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v: %v\n&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">ip</span>)
+	}
+}
+
+</code></pre></div><h3 id="结果-3">结果</h3>
+<pre><code>loopback: 127.0.0.1
+googleDNS: 8.8.8.8
+</code></pre><h2 id="练习-6错误httpstourgo-zhorgmethods20">练习 6：<a href="https://tour.go-zh.org/methods/20">错误</a></h2>
+<p>Sqrt 接受到一个负数时，应当返回一个非 nil 的错误值。复数同样也不被支持。</p>
+<ul>
+<li>创建一个新的类型
+<code>type ErrNegativeSqrt float64</code>
+并为其实现
+<code>func (e ErrNegativeSqrt) Error() string</code>
+方法使其拥有 <code>error</code> 值，通过 <code>ErrNegativeSqrt(-2).Error()</code> 调用该方法应返回 <code>&quot;cannot Sqrt negative number: -2&quot;</code>。</li>
+</ul>
+<blockquote>
+<p>注意: 在 Error 方法内调用 <code>fmt.Sprint(e)</code> 会让程序陷入死循环。可以通过先转换 e 来避免这个问题：<code>fmt.Sprint(float64(e))</code>。这是为什么呢？</p>
+</blockquote>
+<ul>
+<li>修改 <code>Sqrt</code> 函数，使其接受一个负数时，返回 <code>ErrNegativeSqrt</code> 值。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Sqrt</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) (<span style="color:#66d9ef">float64</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Sqrt</span>(<span style="color:#ae81ff">2</span>))
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Sqrt</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>))
+}
+
+</code></pre></div><h3 id="实现-5">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;math&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ErrNegativeSqrt</span> <span style="color:#66d9ef">float64</span>
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">ErrNegativeSqrt</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {	<span style="color:#75715e">// 重写 Error 函数
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;cannot Sqrt negative number:%v&#34;</span>, float64(<span style="color:#a6e22e">e</span>))
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Sqrt</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) (<span style="color:#66d9ef">float64</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span> &lt; <span style="color:#ae81ff">0</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">ErrNegativeSqrt</span>(<span style="color:#a6e22e">x</span>)
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Sqrt</span>(<span style="color:#a6e22e">x</span>), <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Sqrt</span>(<span style="color:#ae81ff">2</span>))
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Sqrt</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>))
+}
+
+</code></pre></div><h3 id="结果-4">结果</h3>
+<pre><code>1.4142135623730951 &lt;nil&gt;
+0 cannot Sqrt negative number:-2
+</code></pre><h2 id="练习-7readerhttpstourgo-zhorgmethods22">练习 7：<a href="https://tour.go-zh.org/methods/22">Reader</a></h2>
+<ul>
+<li>实现一个 <code>Reader</code> 类型，它产生一个 ASCII 字符 &lsquo;A&rsquo; 的无限流。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;golang.org/x/tour/reader&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MyReader</span> <span style="color:#66d9ef">struct</span>{}
+
+<span style="color:#75715e">// TODO: 给 MyReader 添加一个 Read([]byte) (int, error) 方法
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">reader</span>.<span style="color:#a6e22e">Validate</span>(<span style="color:#a6e22e">MyReader</span>{})
+}
+
+</code></pre></div><h3 id="实现-6">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;golang.org/x/tour/reader&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MyReader</span> <span style="color:#66d9ef">struct</span>{}
+
+<span style="color:#75715e">// TODO: 给 MyReader 添加一个 Read([]byte) (int, error) 方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">MyReader</span>) <span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">b</span> []<span style="color:#66d9ef">byte</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">b</span>[<span style="color:#ae81ff">0</span>] = <span style="color:#e6db74">&#39;A&#39;</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">reader</span>.<span style="color:#a6e22e">Validate</span>(<span style="color:#a6e22e">MyReader</span>{})
+}
+
+</code></pre></div><h2 id="练习-8rot13readerhttpstourgo-zhorgmethods23">练习 8：<a href="https://tour.go-zh.org/methods/23">rot13Reader</a></h2>
+<p>有种常见的模式是一个 <code>io.Reader</code> 包装另一个 <code>io.Reader</code>，然后通过某种方式修改其数据流。</p>
+<blockquote>
+<p>例如，<code>gzip.NewReader</code> 函数接受一个 <code>io.Reader</code>（已压缩的数据流）并返回一个同样实现了 <code>io.Reader</code> 的 <code>*gzip.Reader</code>（解压后的数据流）。</p>
+</blockquote>
+<ul>
+<li>编写一个实现了 <code>io.Reader</code> 并从另一个 <code>io.Reader</code> 中读取数据的 <code>rot13Reader</code>，通过应用 <code>rot13</code> 代换密码对数据流进行修改。</li>
+</ul>
+<blockquote>
+<p><code>rot13Reader</code> 类型已经提供。实现 <code>Read</code> 方法以满足 <code>io.Reader</code>。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;io&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">rot13Reader</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Reader</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#e6db74">&#34;Lbh penpxrq gur pbqr!&#34;</span>)
+	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rot13Reader</span>{<span style="color:#a6e22e">s</span>}
+	<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Copy</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">r</span>)
+}
+
+</code></pre></div><h3 id="实现-7">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;io&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">rot13Reader</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">r</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Reader</span>
+}
+
+<span style="color:#75715e">// 实现 rot13 函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">rot13</span>(<span style="color:#a6e22e">out</span> <span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">byte</span> {		<span style="color:#75715e">//字母转换
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">switch</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;M&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;m&#39;</span>:
+		<span style="color:#a6e22e">out</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">13</span>
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;N&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;Z&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;n&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;z&#39;</span>:
+		<span style="color:#a6e22e">out</span> <span style="color:#f92672">-=</span> <span style="color:#ae81ff">13</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">fz</span> <span style="color:#a6e22e">rot13Reader</span>) <span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">b</span> []<span style="color:#66d9ef">byte</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fz</span>.<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">b</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">b</span>[<span style="color:#a6e22e">i</span>] = <span style="color:#a6e22e">rot13</span>(<span style="color:#a6e22e">b</span>[<span style="color:#a6e22e">i</span>])
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">e</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#e6db74">&#34;Lbh penpxrq gur pbqr!&#34;</span>)
+	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rot13Reader</span>{<span style="color:#a6e22e">s</span>}
+	<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Copy</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">r</span>)
+}
+
+</code></pre></div><h3 id="结果-5">结果</h3>
+<pre><code>You cracked the code!%   
+</code></pre><h2 id="练习-9图像httpstourgo-zhorgmethods25">练习 9：<a href="https://tour.go-zh.org/methods/25">图像</a></h2>
+<p>还记得之前编写的图片生成器 吗？我们再来编写另外一个，不过这次它将会返回一个 image.Image 的实现而非一个数据切片。<br>
+定义你自己的 Image 类型，实现必要的方法并调用 pic.ShowImage。<br>
+Bounds 应当返回一个 image.Rectangle ，例如 image.Rect(0, 0, w, h)。<br>
+ColorModel 应当返回 color.RGBAModel。<br>
+At 应当返回一个颜色。上一个图片生成器的值 v 对应于此次的 color.RGBA{v, v, 255, 255}。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;golang.org/x/tour/pic&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Image</span> <span style="color:#66d9ef">struct</span>{}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Image</span>{}
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">ShowImage</span>(<span style="color:#a6e22e">m</span>)
+}
+</code></pre></div><h3 id="实现-8">实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;image&#34;</span>
+	<span style="color:#e6db74">&#34;image/color&#34;</span>
+
+	<span style="color:#e6db74">&#34;golang.org/x/tour/pic&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Image</span> <span style="color:#66d9ef">struct</span>{}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">i</span> <span style="color:#a6e22e">Image</span>) <span style="color:#a6e22e">ColorModel</span>() <span style="color:#a6e22e">color</span>.<span style="color:#a6e22e">Model</span> {	<span style="color:#75715e">//实现 Image 包中颜色模式的方法
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">color</span>.<span style="color:#a6e22e">RGBAModel</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">i</span> <span style="color:#a6e22e">Image</span>) <span style="color:#a6e22e">Bounds</span>() <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">Rectangle</span> {	<span style="color:#75715e">//实现 Image 包中生成图片边界的方法
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">Rect</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>)
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">i</span> <span style="color:#a6e22e">Image</span>) <span style="color:#a6e22e">At</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">color</span>.<span style="color:#a6e22e">Color</span> {	<span style="color:#75715e">// 实现 Image 包中生成图像某个点的方法
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">color</span>.<span style="color:#a6e22e">RGBA</span>{uint8(<span style="color:#a6e22e">x</span>), uint8(<span style="color:#a6e22e">y</span>), uint8(<span style="color:#ae81ff">255</span>), uint8(<span style="color:#ae81ff">255</span>)}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Image</span>{}
+	<span style="color:#a6e22e">pic</span>.<span style="color:#a6e22e">ShowImage</span>(<span style="color:#a6e22e">m</span>)
+}
+
+</code></pre></div></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+  <div class="footer container-lg width-full p-responsive" role="contentinfo">
+    <div
+        class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+            <li class="mr-3 mr-lg-0">&copy;2019&nbsp;<b><a href="mailto: jeremytowne@163.com">JeremyTowne</a></b>
+            </li>
+        </ul>
+
+        <a aria-label="Homepage" title="ToDevOps" class="footer-octicon d-none d-lg-block mx-lg-4"
+            href="https://todevops.github.io/">
+            <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24"
+                aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+        </a>
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+        </ul>
+    </div>
+    <div class="d-flex flex-justify-center pb-6">
+        <span class="f6 text-gray-light"></span>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+    type="application/javascript" src="https://todevops.github.io/js/frameworks.js"></script>
+
+<script crossorigin="anonymous" async="async"
+    type="application/javascript" src="https://todevops.github.io/js/github-bootstrap.js"></script>
+<script>
+    let classs = ['pinned-item-desc', 'text-gray', 'text-small', 'd-block', 'mt-2', 'mb-3'];
+    const pinned_posts = document.getElementsByName('pinned-post');
+    for (let i = 0; i < pinned_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = pinned_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+    classs = [ 'd-inline-block', 'text-gray', 'mb-2', 'pr-4'];
+    const posts_posts = document.getElementsByName('posts-post');
+    for (let i = 0; i < posts_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = posts_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

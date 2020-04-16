@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on ToDevOps</title>
+    <link>https://todevops.github.io/tags/mysql/</link>
+    <description>Recent content in mysql on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 15 Oct 2019 01:31:26 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL Group Replication 安装及配置</title>
+      <link>https://todevops.github.io/posts/mysql_group_replication/</link>
+      <pubDate>Tue, 15 Oct 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_group_replication/</guid>
+      <description>&lt;p&gt;MySQL 组复制&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于 GTID 的 MySQL 双主安装及配置</title>
+      <link>https://todevops.github.io/posts/mysql_replication/</link>
+      <pubDate>Sun, 15 Sep 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_replication/</guid>
+      <description>&lt;p&gt;基于 GTID 的 MySQL 双主安装及配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>开启mysql慢查询和死锁日志</title>
+      <link>https://todevops.github.io/posts/mysql_slow_query/</link>
+      <pubDate>Sun, 15 Sep 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_slow_query/</guid>
+      <description>&lt;p&gt;开启mysql慢查询和死锁日志&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 安装指南</title>
+      <link>https://todevops.github.io/posts/mysql/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql/</guid>
+      <description>&lt;p&gt;MySQL 安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 组复制</title>
+      <link>https://todevops.github.io/posts/mgr/</link>
+      <pubDate>Wed, 30 Jan 2019 12:24:39 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mgr/</guid>
+      <description>&lt;p&gt;MySQL 组复制&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 常用函数</title>
+      <link>https://todevops.github.io/posts/mysql_function/</link>
+      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_function/</guid>
+      <description>&lt;p&gt;MySQL 常用函数&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

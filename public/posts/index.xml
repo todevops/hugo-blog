@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on ToDevOps</title>
+    <link>https://todevops.github.io/posts/</link>
+    <description>Recent content in Posts on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Red Hat Enterprise Linux 7 配置网络成组</title>
+      <link>https://todevops.github.io/posts/team/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/team/</guid>
+      <description>&lt;p&gt;网络成组旨在通过提供小内核驱动程序，以便使用不同的方法应用这个概念，实现数据包流的快速处理，并让各种用户空间应用程序在用户空间执行各种任务。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Red Hat Enterprise Linux 7 配置网络绑定</title>
+      <link>https://todevops.github.io/posts/bond/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/bond/</guid>
+      <description>&lt;p&gt;Red Hat Enterprise Linux 7 可让管理员将多个网络接口绑定在一起作为单一、绑定的频道。频道绑定可让两个或多个接口作为一个接口动作， 同时增加带宽，并提供冗余。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>journald 指南</title>
+      <link>https://todevops.github.io/posts/journald/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/journald/</guid>
+      <description>&lt;p&gt;journald （systemd 日志管理服务）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx 安装与配置</title>
+      <link>https://todevops.github.io/posts/nginx/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/nginx/</guid>
+      <description>&lt;p&gt;Nginx 的安装以及相关配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenLDAP 安装指南</title>
+      <link>https://todevops.github.io/posts/openldap/</link>
+      <pubDate>Fri, 27 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/openldap/</guid>
+      <description>&lt;p&gt;CentOS 7 OpenLDAP 安装配置指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git Hooks（钩子）</title>
+      <link>https://todevops.github.io/posts/git_hooks/</link>
+      <pubDate>Sat, 21 Dec 2019 00:51:16 +0800</pubDate>
+      
+      <guid>https://todevops.github.io/posts/git_hooks/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90&#34;&gt;Git Hooks&lt;/a&gt; - 在特定的重要动作发生时触发自定义脚本。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins 入门指南</title>
+      <link>https://todevops.github.io/posts/jenkins/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins/</guid>
+      <description>&lt;p&gt;简单的介绍 Jenkins 的安装与使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在服务器上搭建 Git</title>
+      <link>https://todevops.github.io/posts/git_in_server/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/git_in_server/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%90%AD%E5%BB%BA-Git&#34;&gt;服务器上的 Git&lt;/a&gt; - 在服务器上搭建 Git&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LeetCode每日一题（最长公共前缀）</title>
+      <link>https://todevops.github.io/posts/leetcode_daily_4/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/leetcode_daily_4/</guid>
+      <description>&lt;p&gt;LeetCode每日一题（罗马数字转整数）&lt;a href=&#34;https://leetcode-cn.com/problems/longest-common-prefix/&#34;&gt;https://leetcode-cn.com/problems/longest-common-prefix/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LeetCode每日一题（罗马数字转整数）</title>
+      <link>https://todevops.github.io/posts/leetcode_daily_3/</link>
+      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/leetcode_daily_3/</guid>
+      <description>&lt;p&gt;LeetCode每日一题（罗马数字转整数）&lt;a href=&#34;https://leetcode-cn.com/problems/roman-to-integer/&#34;&gt;https://leetcode-cn.com/problems/roman-to-integer/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LeetCode每日一题（整数反转）</title>
+      <link>https://todevops.github.io/posts/leetcode_daily_2/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/leetcode_daily_2/</guid>
+      <description>&lt;p&gt;LeetCode每日一题（整数反转）&lt;a href=&#34;https://leetcode-cn.com/problems/reverse-integer/&#34;&gt;https://leetcode-cn.com/problems/reverse-integer/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins使用Maven构建Java应用程序</title>
+      <link>https://todevops.github.io/posts/jenkins_maven/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins_maven/</guid>
+      <description>&lt;p&gt;Jenkins使用Maven构建简单的Java应用程序&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins使用npm构建Node.js应用</title>
+      <link>https://todevops.github.io/posts/jenkins_npm/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins_npm/</guid>
+      <description>&lt;p&gt;Jenkins使用npm构建Node.js应用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins使用PyInstaller构建Python应用</title>
+      <link>https://todevops.github.io/posts/jenkins_python/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins_python/</guid>
+      <description>&lt;p&gt;Jenkins使用PyInstaller构建Python应用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LeetCode每日一题（两数之和）</title>
+      <link>https://todevops.github.io/posts/leetcode_daily_1/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/leetcode_daily_1/</guid>
+      <description>&lt;p&gt;LeetCode每日一题（两数之和）&lt;a href=&#34;https://leetcode-cn.com/problems/two-sum/&#34;&gt;https://leetcode-cn.com/problems/two-sum/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go Tour 练习</title>
+      <link>https://todevops.github.io/posts/go_tour/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/go_tour/</guid>
+      <description>&lt;p&gt;Go 指南练习，题解&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python 判断变量的类型</title>
+      <link>https://todevops.github.io/posts/python-variable/</link>
+      <pubDate>Wed, 20 Nov 2019 18:10:52 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/python-variable/</guid>
+      <description>&lt;p&gt;Python 判断变量的类型的方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker /etc/docker/daemon.json 文件的参数</title>
+      <link>https://todevops.github.io/posts/docker-daemon-json/</link>
+      <pubDate>Wed, 20 Nov 2019 17:25:46 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/docker-daemon-json/</guid>
+      <description>&lt;p&gt;Docker /etc/docker/daemon.json 文件的参数清单&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>将 Nginx 日志格式化成 json</title>
+      <link>https://todevops.github.io/posts/nginx-log-format-to-json/</link>
+      <pubDate>Tue, 19 Nov 2019 17:27:38 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/nginx-log-format-to-json/</guid>
+      <description>&lt;p&gt;将 Nginx 日志格式化成 json 格式&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 ELK 搭建日志分析系统</title>
+      <link>https://todevops.github.io/posts/elk/</link>
+      <pubDate>Tue, 19 Nov 2019 13:22:39 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/elk/</guid>
+      <description>&lt;p&gt;使用 ELK 搭建日志分析系统&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Filebeat 指南</title>
+      <link>https://todevops.github.io/posts/filebeat/</link>
+      <pubDate>Tue, 19 Nov 2019 00:56:12 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/filebeat/</guid>
+      <description>&lt;p&gt;使用 filebeat 进行日志抓取&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>habor</title>
+      <link>https://todevops.github.io/posts/habor/</link>
+      <pubDate>Mon, 18 Nov 2019 14:21:52 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/habor/</guid>
+      <description>curl -s 192.168.33.11:5000/v2/_catalog | json_reformat curl -s 192.168.33.11:5000/v2/base/centos/tags/list | json_reformat</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes 离线安装</title>
+      <link>https://todevops.github.io/posts/kubernetes/</link>
+      <pubDate>Tue, 15 Oct 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/kubernetes/</guid>
+      <description>&lt;p&gt;Kubernetes 离线安装&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>macOS 设置 launchpad 图标大小</title>
+      <link>https://todevops.github.io/posts/macos_launchpad_config/</link>
+      <pubDate>Tue, 15 Oct 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/macos_launchpad_config/</guid>
+      <description>&lt;p&gt;KMacOS 设置 launchpad 图标大小&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL Group Replication 安装及配置</title>
+      <link>https://todevops.github.io/posts/mysql_group_replication/</link>
+      <pubDate>Tue, 15 Oct 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_group_replication/</guid>
+      <description>&lt;p&gt;MySQL 组复制&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Cannot set LC_ALL to default locale</title>
+      <link>https://todevops.github.io/posts/issuse_locale/</link>
+      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/issuse_locale/</guid>
+      <description>&lt;p&gt;locale: Cannot set LC_ALL to default locale: No such file or directory&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pip 使用国内源</title>
+      <link>https://todevops.github.io/posts/pip_cn/</link>
+      <pubDate>Sun, 15 Sep 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/pip_cn/</guid>
+      <description>&lt;p&gt;pip 使用国内源&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 vagrant 搭建 kubernetes 基础环境</title>
+      <link>https://todevops.github.io/posts/vagrant_k8s/</link>
+      <pubDate>Sun, 15 Sep 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/vagrant_k8s/</guid>
+      <description>&lt;p&gt;使用 vagrant 搭建 kubernetes 基础环境&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于 GTID 的 MySQL 双主安装及配置</title>
+      <link>https://todevops.github.io/posts/mysql_replication/</link>
+      <pubDate>Sun, 15 Sep 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_replication/</guid>
+      <description>&lt;p&gt;基于 GTID 的 MySQL 双主安装及配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>开启mysql慢查询和死锁日志</title>
+      <link>https://todevops.github.io/posts/mysql_slow_query/</link>
+      <pubDate>Sun, 15 Sep 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_slow_query/</guid>
+      <description>&lt;p&gt;开启mysql慢查询和死锁日志&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git 指南</title>
+      <link>https://todevops.github.io/posts/git/</link>
+      <pubDate>Sun, 26 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/git/</guid>
+      <description>&lt;p&gt;Git 概念以及常用命令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Prometheus &#43; Grafana</title>
+      <link>https://todevops.github.io/posts/promethues/</link>
+      <pubDate>Wed, 27 Feb 2019 19:59:14 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/promethues/</guid>
+      <description>&lt;p&gt;开源监控平台 Prometheus&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 安装指南</title>
+      <link>https://todevops.github.io/posts/mysql/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql/</guid>
+      <description>&lt;p&gt;MySQL 安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes 离线安装</title>
+      <link>https://todevops.github.io/posts/k8s/</link>
+      <pubDate>Thu, 07 Feb 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/k8s/</guid>
+      <description>&lt;p&gt;Kubernetes 离线安装&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 组复制</title>
+      <link>https://todevops.github.io/posts/mgr/</link>
+      <pubDate>Wed, 30 Jan 2019 12:24:39 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mgr/</guid>
+      <description>&lt;p&gt;MySQL 组复制&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 Powerline 美化终端</title>
+      <link>https://todevops.github.io/posts/powerline/</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/powerline/</guid>
+      <description>&lt;p&gt;使用 Powerline 美化终端&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 常用函数</title>
+      <link>https://todevops.github.io/posts/mysql_function/</link>
+      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/mysql_function/</guid>
+      <description>&lt;p&gt;MySQL 常用函数&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>uWSGI 部署 Django 应用</title>
+      <link>https://todevops.github.io/posts/uwsgi/</link>
+      <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/uwsgi/</guid>
+      <description>&lt;p&gt;uWSGI 部署 Django 应用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 oh-my-posh 美化 PowerShell</title>
+      <link>https://todevops.github.io/posts/oh-my-posh/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/oh-my-posh/</guid>
+      <description>&lt;p&gt;使用 oh-my-posh 美化 PowerShell&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>gitlab-ce 安装指南</title>
+      <link>https://todevops.github.io/posts/gitlab/</link>
+      <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/gitlab/</guid>
+      <description>&lt;p&gt;gitlab 安装使用指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 Ambari 部署 Hadoop 集群</title>
+      <link>https://todevops.github.io/posts/ambari/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/ambari/</guid>
+      <description>&lt;p&gt;使用 Ambari 部署 Hadoop 集群&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ansible 自动化运维实战</title>
+      <link>https://todevops.github.io/posts/ansible/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/ansible/</guid>
+      <description>&lt;p&gt;Ansible 自动化运维实战&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Arch Linux 入坑指南</title>
+      <link>https://todevops.github.io/posts/archlinux_install/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/archlinux_install/</guid>
+      <description>&lt;p&gt;Arch Linux 安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 文本处理器之 awk</title>
+      <link>https://todevops.github.io/posts/awk/</link>
+      <pubDate>Sat, 15 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/awk/</guid>
+      <description>&lt;p&gt;Linux 文本处理器之 awk&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CentOS Oracle 12c 安装指南</title>
+      <link>https://todevops.github.io/posts/centos_install_oracle12c/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/centos_install_oracle12c/</guid>
+      <description>&lt;p&gt;CentOS Oracle 12c 安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker 入坑指南</title>
+      <link>https://todevops.github.io/posts/docker/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/docker/</guid>
+      <description>&lt;p&gt;Docker 的安装与使用方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>搭建基于 HDFS 碎片文件存储服务</title>
+      <link>https://todevops.github.io/posts/hdfs/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/hdfs/</guid>
+      <description>&lt;p&gt;搭建基于 HDFS 碎片文件存储服务&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo 打造静态博客</title>
+      <link>https://todevops.github.io/posts/hexo/</link>
+      <pubDate>Sun, 09 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/hexo/</guid>
+      <description>&lt;p&gt;使用 Hexo 打造静态博客&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>给 history 添加时间戳</title>
+      <link>https://todevops.github.io/posts/bash_history/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/bash_history/</guid>
+      <description>&lt;p&gt;给history 添加时间戳&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>jekyll 打造静态博客</title>
+      <link>https://todevops.github.io/posts/jekyll/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jekyll/</guid>
+      <description>&lt;p&gt;使用 jekyll 打造静态博客&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Keepalive 安装与配置</title>
+      <link>https://todevops.github.io/posts/keepalive/</link>
+      <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/keepalive/</guid>
+      <description>&lt;p&gt;Keepalive 安装与配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 网络管理</title>
+      <link>https://todevops.github.io/posts/managenetwork/</link>
+      <pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/managenetwork/</guid>
+      <description>&lt;p&gt;Linux 网络管理&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 时区设置</title>
+      <link>https://todevops.github.io/posts/timezone/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/timezone/</guid>
+      <description>&lt;p&gt;Linux 时区设置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tomcat 配置与优化</title>
+      <link>https://todevops.github.io/posts/tomcat/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/tomcat/</guid>
+      <description>&lt;p&gt;Tomcat 配置与优化&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LVS</title>
+      <link>https://todevops.github.io/posts/lvs/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/lvs/</guid>
+      <description>&lt;p&gt;LVS&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Node.js 安装指南</title>
+      <link>https://todevops.github.io/posts/nodejs/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/nodejs/</guid>
+      <description>&lt;p&gt;Node.js 安装（NVM 包管理器）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>树莓派安装教程</title>
+      <link>https://todevops.github.io/posts/raspberrypi/</link>
+      <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/raspberrypi/</guid>
+      <description>&lt;p&gt;树莓派安装教程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SELinux</title>
+      <link>https://todevops.github.io/posts/selinux/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/selinux/</guid>
+      <description>&lt;p&gt;SELinux&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Subversion 安装与配置</title>
+      <link>https://todevops.github.io/posts/svn/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/svn/</guid>
+      <description>&lt;p&gt;Subversion 安装与配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 网络配置</title>
+      <link>https://todevops.github.io/posts/ubuntuserver/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/ubuntuserver/</guid>
+      <description>&lt;p&gt;Ubuntu Server 网络配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>VVirtualBox EFI 引导问题</title>
+      <link>https://todevops.github.io/posts/virtualbox/</link>
+      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/virtualbox/</guid>
+      <description>&lt;p&gt;VirtualBox EFI 引导问题&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>FTP 教程</title>
+      <link>https://todevops.github.io/posts/vsftpd/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/vsftpd/</guid>
+      <description>&lt;p&gt;一份简易的 ftp 安装使用教程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows LinuxSubSystem</title>
+      <link>https://todevops.github.io/posts/wsl/</link>
+      <pubDate>Mon, 19 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/wsl/</guid>
+      <description>&lt;p&gt;Windows Linux 子系统安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix Proxy 分布式监控</title>
+      <link>https://todevops.github.io/posts/zabbix_proxy/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_proxy/</guid>
+      <description>&lt;p&gt;使用 Zabbix Proxy 搭建分布式监控&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 安装指南</title>
+      <link>https://todevops.github.io/posts/zabbix_installation/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_installation/</guid>
+      <description>&lt;p&gt;Zabbix 3.4 安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 通过 jmx 监控 Tomcat</title>
+      <link>https://todevops.github.io/posts/zabbix_jmx/</link>
+      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_jmx/</guid>
+      <description>&lt;p&gt;Zabbix 通过 jmx 监控 Tomcat&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 通过 SNMP 进行监控</title>
+      <link>https://todevops.github.io/posts/zabbix_snmp/</link>
+      <pubDate>Thu, 15 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_snmp/</guid>
+      <description>&lt;p&gt;Zabbix 通过 SNMP 进行监控&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 企业微信告警</title>
+      <link>https://todevops.github.io/posts/zabbix_wechat_alert/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_wechat_alert/</guid>
+      <description>&lt;p&gt;使用 python 编写 Zabbix 企业微信告警脚本&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

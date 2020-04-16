@@ -1,0 +1,19 @@
+baseURL = "https://todevops.github.io/"
+title = "ToDevOps"
+googleAnalytics = "UA-123-456-789"
+theme = "github"
+paginate = 10
+staticDir = ["static"]
+
+[params]
+  author = "JeremyTowne"
+  description = "ToDevOps"
+  github = "todevops"
+  avatar = "https://todevops.github.io/images/avatar.png"
+  email = "jeremytowne@163.com"
+  url = "https://todevops.github.io"
+  weibo = "https://www.baidu.com"
+  wechat = "https://www.baidu.com"
+  qq = "1747552250"
+  zhihu = "https://www.baidu.com"
+  baidu = "https://www.baidu.com"

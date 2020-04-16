@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on ToDevOps</title>
+    <link>https://todevops.github.io/categories/linux/</link>
+    <description>Recent content in linux on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Red Hat Enterprise Linux 7 配置网络成组</title>
+      <link>https://todevops.github.io/posts/team/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/team/</guid>
+      <description>&lt;p&gt;网络成组旨在通过提供小内核驱动程序，以便使用不同的方法应用这个概念，实现数据包流的快速处理，并让各种用户空间应用程序在用户空间执行各种任务。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Red Hat Enterprise Linux 7 配置网络绑定</title>
+      <link>https://todevops.github.io/posts/bond/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/bond/</guid>
+      <description>&lt;p&gt;Red Hat Enterprise Linux 7 可让管理员将多个网络接口绑定在一起作为单一、绑定的频道。频道绑定可让两个或多个接口作为一个接口动作， 同时增加带宽，并提供冗余。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>journald 指南</title>
+      <link>https://todevops.github.io/posts/journald/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/journald/</guid>
+      <description>&lt;p&gt;journald （systemd 日志管理服务）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx 安装与配置</title>
+      <link>https://todevops.github.io/posts/nginx/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/nginx/</guid>
+      <description>&lt;p&gt;Nginx 的安装以及相关配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenLDAP 安装指南</title>
+      <link>https://todevops.github.io/posts/openldap/</link>
+      <pubDate>Fri, 27 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/openldap/</guid>
+      <description>&lt;p&gt;CentOS 7 OpenLDAP 安装配置指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins 入门指南</title>
+      <link>https://todevops.github.io/posts/jenkins/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins/</guid>
+      <description>&lt;p&gt;简单的介绍 Jenkins 的安装与使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes 离线安装</title>
+      <link>https://todevops.github.io/posts/kubernetes/</link>
+      <pubDate>Tue, 15 Oct 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/kubernetes/</guid>
+      <description>&lt;p&gt;Kubernetes 离线安装&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Cannot set LC_ALL to default locale</title>
+      <link>https://todevops.github.io/posts/issuse_locale/</link>
+      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/issuse_locale/</guid>
+      <description>&lt;p&gt;locale: Cannot set LC_ALL to default locale: No such file or directory&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 vagrant 搭建 kubernetes 基础环境</title>
+      <link>https://todevops.github.io/posts/vagrant_k8s/</link>
+      <pubDate>Sun, 15 Sep 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/vagrant_k8s/</guid>
+      <description>&lt;p&gt;使用 vagrant 搭建 kubernetes 基础环境&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes 离线安装</title>
+      <link>https://todevops.github.io/posts/k8s/</link>
+      <pubDate>Thu, 07 Feb 2019 01:31:26 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/k8s/</guid>
+      <description>&lt;p&gt;Kubernetes 离线安装&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>uWSGI 部署 Django 应用</title>
+      <link>https://todevops.github.io/posts/uwsgi/</link>
+      <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/uwsgi/</guid>
+      <description>&lt;p&gt;uWSGI 部署 Django 应用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 Ambari 部署 Hadoop 集群</title>
+      <link>https://todevops.github.io/posts/ambari/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/ambari/</guid>
+      <description>&lt;p&gt;使用 Ambari 部署 Hadoop 集群&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ansible 自动化运维实战</title>
+      <link>https://todevops.github.io/posts/ansible/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/ansible/</guid>
+      <description>&lt;p&gt;Ansible 自动化运维实战&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Arch Linux 入坑指南</title>
+      <link>https://todevops.github.io/posts/archlinux_install/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/archlinux_install/</guid>
+      <description>&lt;p&gt;Arch Linux 安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker 入坑指南</title>
+      <link>https://todevops.github.io/posts/docker/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/docker/</guid>
+      <description>&lt;p&gt;Docker 的安装与使用方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>搭建基于 HDFS 碎片文件存储服务</title>
+      <link>https://todevops.github.io/posts/hdfs/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/hdfs/</guid>
+      <description>&lt;p&gt;搭建基于 HDFS 碎片文件存储服务&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>给 history 添加时间戳</title>
+      <link>https://todevops.github.io/posts/bash_history/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/bash_history/</guid>
+      <description>&lt;p&gt;给history 添加时间戳&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Keepalive 安装与配置</title>
+      <link>https://todevops.github.io/posts/keepalive/</link>
+      <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/keepalive/</guid>
+      <description>&lt;p&gt;Keepalive 安装与配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 网络管理</title>
+      <link>https://todevops.github.io/posts/managenetwork/</link>
+      <pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/managenetwork/</guid>
+      <description>&lt;p&gt;Linux 网络管理&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 时区设置</title>
+      <link>https://todevops.github.io/posts/timezone/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/timezone/</guid>
+      <description>&lt;p&gt;Linux 时区设置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tomcat 配置与优化</title>
+      <link>https://todevops.github.io/posts/tomcat/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/tomcat/</guid>
+      <description>&lt;p&gt;Tomcat 配置与优化&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LVS</title>
+      <link>https://todevops.github.io/posts/lvs/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/lvs/</guid>
+      <description>&lt;p&gt;LVS&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Node.js 安装指南</title>
+      <link>https://todevops.github.io/posts/nodejs/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/nodejs/</guid>
+      <description>&lt;p&gt;Node.js 安装（NVM 包管理器）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>树莓派安装教程</title>
+      <link>https://todevops.github.io/posts/raspberrypi/</link>
+      <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/raspberrypi/</guid>
+      <description>&lt;p&gt;树莓派安装教程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SELinux</title>
+      <link>https://todevops.github.io/posts/selinux/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/selinux/</guid>
+      <description>&lt;p&gt;SELinux&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Subversion 安装与配置</title>
+      <link>https://todevops.github.io/posts/svn/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/svn/</guid>
+      <description>&lt;p&gt;Subversion 安装与配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 网络配置</title>
+      <link>https://todevops.github.io/posts/ubuntuserver/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/ubuntuserver/</guid>
+      <description>&lt;p&gt;Ubuntu Server 网络配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>FTP 教程</title>
+      <link>https://todevops.github.io/posts/vsftpd/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/vsftpd/</guid>
+      <description>&lt;p&gt;一份简易的 ftp 安装使用教程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 通过 SNMP 进行监控</title>
+      <link>https://todevops.github.io/posts/zabbix_snmp/</link>
+      <pubDate>Thu, 15 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_snmp/</guid>
+      <description>&lt;p&gt;Zabbix 通过 SNMP 进行监控&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 企业微信告警</title>
+      <link>https://todevops.github.io/posts/zabbix_wechat_alert/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_wechat_alert/</guid>
+      <description>&lt;p&gt;使用 python 编写 Zabbix 企业微信告警脚本&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

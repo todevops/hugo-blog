@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on ToDevOps</title>
+    <link>https://todevops.github.io/tags/nginx/</link>
+    <description>Recent content in nginx on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx 安装与配置</title>
+      <link>https://todevops.github.io/posts/nginx/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/nginx/</guid>
+      <description>&lt;p&gt;Nginx 的安装以及相关配置&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

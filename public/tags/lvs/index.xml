@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lvs on ToDevOps</title>
+    <link>https://todevops.github.io/tags/lvs/</link>
+    <description>Recent content in lvs on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 30 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/tags/lvs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LVS</title>
+      <link>https://todevops.github.io/posts/lvs/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/lvs/</guid>
+      <description>&lt;p&gt;LVS&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shell on ToDevOps</title>
+    <link>https://todevops.github.io/tags/shell/</link>
+    <description>Recent content in shell on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 14 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cannot set LC_ALL to default locale</title>
+      <link>https://todevops.github.io/posts/issuse_locale/</link>
+      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/issuse_locale/</guid>
+      <description>&lt;p&gt;locale: Cannot set LC_ALL to default locale: No such file or directory&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 文本处理器之 awk</title>
+      <link>https://todevops.github.io/posts/awk/</link>
+      <pubDate>Sat, 15 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/awk/</guid>
+      <description>&lt;p&gt;Linux 文本处理器之 awk&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>给 history 添加时间戳</title>
+      <link>https://todevops.github.io/posts/bash_history/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/bash_history/</guid>
+      <description>&lt;p&gt;给history 添加时间戳&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 时区设置</title>
+      <link>https://todevops.github.io/posts/timezone/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/timezone/</guid>
+      <description>&lt;p&gt;Linux 时区设置&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gitlab on ToDevOps</title>
+    <link>https://todevops.github.io/tags/gitlab/</link>
+    <description>Recent content in gitlab on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 03 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>gitlab-ce 安装指南</title>
+      <link>https://todevops.github.io/posts/gitlab/</link>
+      <pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/gitlab/</guid>
+      <description>&lt;p&gt;gitlab 安装使用指南&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

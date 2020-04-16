@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet"
+        href="https://todevops.github.io/css/frameworks.css" />
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet" href="https://todevops.github.io/css/github.css" />
+    <meta name="viewport" content="width=device-width">
+
+    <title>Nginx 安装与配置 - ToDevOps</title>
+
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://todevops.github.io/img/favicon.ico">
+    <meta name="theme-color" content="#1e2327">
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-456-789', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body class="env-production emoji-size-boost page-responsive page-profile">
+  <div class="position-relative js-header-wrapper ">
+    <span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar">
+        <span class="progress-pjax-loader-bar top-0 left-0" style="width: 0%;"></span>
+    </span>
+    <header class="Header js-details-container Details flex-wrap flex-lg-nowrap p-responsive" role="banner">
+        <div class="Header-item d-none d-lg-flex">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+        <div
+            class="Header-item Header-item--full flex-column flex-lg-row width-full flex-order-2 flex-lg-order-none mr-0 mr-lg-3 mt-3 mt-lg-0 Details-content--hidden">
+            <div class="header-search flex-self-stretch flex-lg-self-auto mr-0 mr-lg-3 mb-3 mb-lg-0 scoped-search site-scoped-search js-site-search position-relative js-jump-to"
+                role="combobox" aria-owns="jump-to-results" aria-label="Search or jump to" aria-haspopup="listbox"
+                aria-expanded="false">
+                <div class="position-relative">
+                </div>
+            </div>
+        </div>
+        <div class="Header-item Header-item--full flex-justify-center d-lg-none position-relative"
+            style="margin-right: auto;">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+    </header>
+</div>
+
+<div id="start-of-content" class="show-on-focus"></div>
+<div id="js-flash-container">
+</div>
+  
+<div class="application-main " data-commit-hovercards-enabled="">
+    <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode" class="">
+        <main id="js-repo-pjax-container" data-pjax-container="">
+            <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav pt-0 pt-lg-4 ">
+                <div class="repohead-details-container clearfix container-lg p-responsive d-none d-lg-block">
+                    <div class="mb-3 d-flex">
+                        <h1 class="public css-truncate float-none flex-auto width-fit pl-0">
+                            <a class="avatar mr-1" href="https://todevops.github.io/about/">
+                            
+
+                                <img
+                                    src="https://todevops.github.io/images/avatar.png" width="26" height="26">
+                            
+                            </a>
+                            <span class="author"><a
+                                    href="https://todevops.github.io/">JeremyTowne</a></span>
+                            <span class="path-divider">/</span>
+                            <strong itemprop="name" class="css-truncate-target" style="max-width: 410px"><a
+                                    href="https://todevops.github.io/posts/nginx/">Nginx 安装与配置</a></strong>
+
+                            <div class="d-block text-small text-gray">
+                                Created <time-ago datetime="2019-12-31" class="no-wrap"
+                                    title="Created at 2019/12/31">
+                                    2019-12-31</time-ago>
+                                <span class="file-info-divider"></span>
+                                Modifyed <time-ago datetime="2019-12-31" class="no-wrap"
+                                    title="Modifyed  at 2019/12/31">
+                                    2019-12-31</time-ago>
+                            </div>
+                        </h1>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="container-lg clearfix new-discussion-timeline experiment-repo-nav  p-responsive">
+                <div class="repository-content ">
+                    <div class="Box mt-3 position-relative">
+                        <div class="Box-header py-2 d-flex flex-column flex-shrink-0 flex-md-row flex-md-items-center">
+                            <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                                2195 Words
+                                
+                            </div>
+                        </div>
+
+                        <div id="readme" class="Box-body readme blob instapaper_body js-code-block-container">
+                            <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"><p>Nginx 的安装以及相关配置</p>
+<h2 id="nginx-安装">Nginx 安装</h2>
+<h3 id="1-yum-源安装">1. yum 源安装</h3>
+<ul>
+<li>epel 源</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum -y install epel-release
+yum makecache
+yum -y install nginx
+
+systemctl enable nginx <span style="color:#f92672">&amp;&amp;</span> systemctl start nginx
+</code></pre></div><ul>
+<li>nginx 官方源
+<a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS">http://nginx.org/en/linux_packages.html#RHEL-CentOS</a></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum install yum-utils
+
+
+cat &lt; EOF &gt; /etc/yum.repos.d/nginx.repo
+<span style="color:#f92672">[</span>nginx-stable<span style="color:#f92672">]</span>
+name<span style="color:#f92672">=</span>nginx stable repo
+baseurl<span style="color:#f92672">=</span>http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+enabled<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+gpgkey<span style="color:#f92672">=</span>https://nginx.org/keys/nginx_signing.key
+module_hotfixes<span style="color:#f92672">=</span>true
+
+<span style="color:#f92672">[</span>nginx-mainline<span style="color:#f92672">]</span>
+name<span style="color:#f92672">=</span>nginx mainline repo
+baseurl<span style="color:#f92672">=</span>http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+enabled<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+gpgkey<span style="color:#f92672">=</span>https://nginx.org/keys/nginx_signing.key
+module_hotfixes<span style="color:#f92672">=</span>true
+EOF
+
+yum-config-manager --enable nginx-stable
+yum-config-manager --enable nginx-mainline
+
+yum makecache
+yum install nginx
+systemctl enable nginx <span style="color:#f92672">&amp;&amp;</span> systemctl start nginx
+</code></pre></div><h3 id="2-源码编译安装">2. 源码编译安装</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># yum -y install gcc pcre-devel zlib-devel</span>
+</code></pre></div><p>下载 nginx 源码<a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># wget http://nginx.org/download/nginx-1.16.1.tar.gz</span>
+<span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># tar -zxvf nginx-1.16.1.tar.gz</span>
+<span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># cd nginx-1.16.1</span>
+</code></pre></div><ul>
+<li>configure 参数</li>
+</ul>
+<blockquote>
+<p>根据需求设置编译参数</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># ./configure --help</span>
+
+  --help                             print this message
+
+  --prefix<span style="color:#f92672">=</span>PATH                      set installation prefix
+  --sbin-path<span style="color:#f92672">=</span>PATH                   set nginx binary pathname
+  --modules-path<span style="color:#f92672">=</span>PATH                set modules path
+  --conf-path<span style="color:#f92672">=</span>PATH                   set nginx.conf pathname
+  --error-log-path<span style="color:#f92672">=</span>PATH              set error log pathname
+  --pid-path<span style="color:#f92672">=</span>PATH                    set nginx.pid pathname
+  --lock-path<span style="color:#f92672">=</span>PATH                   set nginx.lock pathname
+
+  --user<span style="color:#f92672">=</span>USER                        set non-privileged user <span style="color:#66d9ef">for</span>
+                                     worker processes
+  --group<span style="color:#f92672">=</span>GROUP                      set non-privileged group <span style="color:#66d9ef">for</span>
+                                     worker processes
+
+  --build<span style="color:#f92672">=</span>NAME                       set build name
+  --builddir<span style="color:#f92672">=</span>DIR                     set build directory
+
+  --with-select_module               enable <span style="color:#66d9ef">select</span> module
+  --without-select_module            disable <span style="color:#66d9ef">select</span> module
+  --with-poll_module                 enable poll module
+  --without-poll_module              disable poll module
+
+  --with-threads                     enable thread pool support
+
+  --with-file-aio                    enable file AIO support
+
+  --with-http_ssl_module             enable ngx_http_ssl_module
+  --with-http_v2_module              enable ngx_http_v2_module
+  --with-http_realip_module          enable ngx_http_realip_module
+  --with-http_addition_module        enable ngx_http_addition_module
+  --with-http_xslt_module            enable ngx_http_xslt_module
+  --with-http_xslt_module<span style="color:#f92672">=</span>dynamic    enable dynamic ngx_http_xslt_module
+  --with-http_image_filter_module    enable ngx_http_image_filter_module
+  --with-http_image_filter_module<span style="color:#f92672">=</span>dynamic
+                                     enable dynamic ngx_http_image_filter_module
+  --with-http_geoip_module           enable ngx_http_geoip_module
+  --with-http_geoip_module<span style="color:#f92672">=</span>dynamic   enable dynamic ngx_http_geoip_module
+  --with-http_sub_module             enable ngx_http_sub_module
+  --with-http_dav_module             enable ngx_http_dav_module
+  --with-http_flv_module             enable ngx_http_flv_module
+  --with-http_mp4_module             enable ngx_http_mp4_module
+  --with-http_gunzip_module          enable ngx_http_gunzip_module
+  --with-http_gzip_static_module     enable ngx_http_gzip_static_module
+  --with-http_auth_request_module    enable ngx_http_auth_request_module
+  --with-http_random_index_module    enable ngx_http_random_index_module
+  --with-http_secure_link_module     enable ngx_http_secure_link_module
+  --with-http_degradation_module     enable ngx_http_degradation_module
+  --with-http_slice_module           enable ngx_http_slice_module
+  --with-http_stub_status_module     enable ngx_http_stub_status_module
+
+  --without-http_charset_module      disable ngx_http_charset_module
+  --without-http_gzip_module         disable ngx_http_gzip_module
+  --without-http_ssi_module          disable ngx_http_ssi_module
+  --without-http_userid_module       disable ngx_http_userid_module
+  --without-http_access_module       disable ngx_http_access_module
+  --without-http_auth_basic_module   disable ngx_http_auth_basic_module
+  --without-http_mirror_module       disable ngx_http_mirror_module
+  --without-http_autoindex_module    disable ngx_http_autoindex_module
+  --without-http_geo_module          disable ngx_http_geo_module
+  --without-http_map_module          disable ngx_http_map_module
+  --without-http_split_clients_module disable ngx_http_split_clients_module
+  --without-http_referer_module      disable ngx_http_referer_module
+  --without-http_rewrite_module      disable ngx_http_rewrite_module
+  --without-http_proxy_module        disable ngx_http_proxy_module
+  --without-http_fastcgi_module      disable ngx_http_fastcgi_module
+  --without-http_uwsgi_module        disable ngx_http_uwsgi_module
+  --without-http_scgi_module         disable ngx_http_scgi_module
+  --without-http_grpc_module         disable ngx_http_grpc_module
+  --without-http_memcached_module    disable ngx_http_memcached_module
+  --without-http_limit_conn_module   disable ngx_http_limit_conn_module
+  --without-http_limit_req_module    disable ngx_http_limit_req_module
+  --without-http_empty_gif_module    disable ngx_http_empty_gif_module
+  --without-http_browser_module      disable ngx_http_browser_module
+  --without-http_upstream_hash_module
+                                     disable ngx_http_upstream_hash_module
+  --without-http_upstream_ip_hash_module
+                                     disable ngx_http_upstream_ip_hash_module
+  --without-http_upstream_least_conn_module
+                                     disable ngx_http_upstream_least_conn_module
+  --without-http_upstream_random_module
+                                     disable ngx_http_upstream_random_module
+  --without-http_upstream_keepalive_module
+                                     disable ngx_http_upstream_keepalive_module
+  --without-http_upstream_zone_module
+                                     disable ngx_http_upstream_zone_module
+
+  --with-http_perl_module            enable ngx_http_perl_module
+  --with-http_perl_module<span style="color:#f92672">=</span>dynamic    enable dynamic ngx_http_perl_module
+  --with-perl_modules_path<span style="color:#f92672">=</span>PATH      set Perl modules path
+  --with-perl<span style="color:#f92672">=</span>PATH                   set perl binary pathname
+
+  --http-log-path<span style="color:#f92672">=</span>PATH               set http access log pathname
+  --http-client-body-temp-path<span style="color:#f92672">=</span>PATH  set path to store
+                                     http client request body temporary files
+  --http-proxy-temp-path<span style="color:#f92672">=</span>PATH        set path to store
+                                     http proxy temporary files
+  --http-fastcgi-temp-path<span style="color:#f92672">=</span>PATH      set path to store
+                                     http fastcgi temporary files
+  --http-uwsgi-temp-path<span style="color:#f92672">=</span>PATH        set path to store
+                                     http uwsgi temporary files
+  --http-scgi-temp-path<span style="color:#f92672">=</span>PATH         set path to store
+                                     http scgi temporary files
+
+  --without-http                     disable HTTP server
+  --without-http-cache               disable HTTP cache
+
+  --with-mail                        enable POP3/IMAP4/SMTP proxy module
+  --with-mail<span style="color:#f92672">=</span>dynamic                enable dynamic POP3/IMAP4/SMTP proxy module
+  --with-mail_ssl_module             enable ngx_mail_ssl_module
+  --without-mail_pop3_module         disable ngx_mail_pop3_module
+  --without-mail_imap_module         disable ngx_mail_imap_module
+  --without-mail_smtp_module         disable ngx_mail_smtp_module
+
+  --with-stream                      enable TCP/UDP proxy module
+  --with-stream<span style="color:#f92672">=</span>dynamic              enable dynamic TCP/UDP proxy module
+  --with-stream_ssl_module           enable ngx_stream_ssl_module
+  --with-stream_realip_module        enable ngx_stream_realip_module
+  --with-stream_geoip_module         enable ngx_stream_geoip_module
+  --with-stream_geoip_module<span style="color:#f92672">=</span>dynamic enable dynamic ngx_stream_geoip_module
+  --with-stream_ssl_preread_module   enable ngx_stream_ssl_preread_module
+  --without-stream_limit_conn_module disable ngx_stream_limit_conn_module
+  --without-stream_access_module     disable ngx_stream_access_module
+  --without-stream_geo_module        disable ngx_stream_geo_module
+  --without-stream_map_module        disable ngx_stream_map_module
+  --without-stream_split_clients_module
+                                     disable ngx_stream_split_clients_module
+  --without-stream_return_module     disable ngx_stream_return_module
+  --without-stream_upstream_hash_module
+                                     disable ngx_stream_upstream_hash_module
+  --without-stream_upstream_least_conn_module
+                                     disable ngx_stream_upstream_least_conn_module
+  --without-stream_upstream_random_module
+                                     disable ngx_stream_upstream_random_module
+  --without-stream_upstream_zone_module
+                                     disable ngx_stream_upstream_zone_module
+
+  --with-google_perftools_module     enable ngx_google_perftools_module
+  --with-cpp_test_module             enable ngx_cpp_test_module
+
+  --add-module<span style="color:#f92672">=</span>PATH                  enable external module
+  --add-dynamic-module<span style="color:#f92672">=</span>PATH          enable dynamic external module
+
+  --with-compat                      dynamic modules compatibility
+
+  --with-cc<span style="color:#f92672">=</span>PATH                     set C compiler pathname
+  --with-cpp<span style="color:#f92672">=</span>PATH                    set C preprocessor pathname
+  --with-cc-opt<span style="color:#f92672">=</span>OPTIONS              set additional C compiler options
+  --with-ld-opt<span style="color:#f92672">=</span>OPTIONS              set additional linker options
+  --with-cpu-opt<span style="color:#f92672">=</span>CPU                 build <span style="color:#66d9ef">for</span> the specified CPU, valid values:
+                                     pentium, pentiumpro, pentium3, pentium4,
+                                     athlon, opteron, sparc32, sparc64, ppc64
+
+  --without-pcre                     disable PCRE library usage
+  --with-pcre                        force PCRE library usage
+  --with-pcre<span style="color:#f92672">=</span>DIR                    set path to PCRE library sources
+  --with-pcre-opt<span style="color:#f92672">=</span>OPTIONS            set additional build options <span style="color:#66d9ef">for</span> PCRE
+  --with-pcre-jit                    build PCRE with JIT compilation support
+
+  --with-zlib<span style="color:#f92672">=</span>DIR                    set path to zlib library sources
+  --with-zlib-opt<span style="color:#f92672">=</span>OPTIONS            set additional build options <span style="color:#66d9ef">for</span> zlib
+  --with-zlib-asm<span style="color:#f92672">=</span>CPU                use zlib assembler sources optimized
+                                     <span style="color:#66d9ef">for</span> the specified CPU, valid values:
+                                     pentium, pentiumpro
+
+  --with-libatomic                   force libatomic_ops library usage
+  --with-libatomic<span style="color:#f92672">=</span>DIR               set path to libatomic_ops library sources
+
+  --with-openssl<span style="color:#f92672">=</span>DIR                 set path to OpenSSL library sources
+  --with-openssl-opt<span style="color:#f92672">=</span>OPTIONS         set additional build options <span style="color:#66d9ef">for</span> OpenSSL
+
+  --with-debug                       enable debug logging
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># mkdir nginx-src</span>
+<span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># ./configure --prefix=$PWD/nginx-src</span>
+<span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># make &amp;&amp; make install</span>
+<span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># ./nginx-src/sbin/nginx -v</span>
+nginx version: nginx/1.16.1
+
+<span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># ldd ./nginx-src/sbin/nginx</span>
+	linux-vdso.so.1 <span style="color:#f92672">=</span>&gt;  <span style="color:#f92672">(</span>0x00007fff44dea000<span style="color:#f92672">)</span>
+	libdl.so.2 <span style="color:#f92672">=</span>&gt; /lib64/libdl.so.2 <span style="color:#f92672">(</span>0x00007f9d0b173000<span style="color:#f92672">)</span>
+	libpthread.so.0 <span style="color:#f92672">=</span>&gt; /lib64/libpthread.so.0 <span style="color:#f92672">(</span>0x00007f9d0af57000<span style="color:#f92672">)</span>
+	libcrypt.so.1 <span style="color:#f92672">=</span>&gt; /lib64/libcrypt.so.1 <span style="color:#f92672">(</span>0x00007f9d0ad20000<span style="color:#f92672">)</span>
+	libpcre.so.1 <span style="color:#f92672">=</span>&gt; /lib64/libpcre.so.1 <span style="color:#f92672">(</span>0x00007f9d0aabe000<span style="color:#f92672">)</span>
+	libz.so.1 <span style="color:#f92672">=</span>&gt; /lib64/libz.so.1 <span style="color:#f92672">(</span>0x00007f9d0a8a8000<span style="color:#f92672">)</span>
+	libc.so.6 <span style="color:#f92672">=</span>&gt; /lib64/libc.so.6 <span style="color:#f92672">(</span>0x00007f9d0a4da000<span style="color:#f92672">)</span>
+	/lib64/ld-linux-x86-64.so.2 <span style="color:#f92672">(</span>0x00007f9d0b377000<span style="color:#f92672">)</span>
+	libfreebl3.so <span style="color:#f92672">=</span>&gt; /lib64/libfreebl3.so <span style="color:#f92672">(</span>0x00007f9d0a2d7000<span style="color:#f92672">)</span>
+
+<span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># mv nginx-src/ /opt/nginx</span>
+<span style="color:#f92672">[</span>root@nginx nginx-1.16.1<span style="color:#f92672">]</span><span style="color:#75715e"># ll /opt/nginx/</span>
+总用量 <span style="color:#ae81ff">0</span>
+drwxr-xr-x <span style="color:#ae81ff">2</span> root root <span style="color:#ae81ff">333</span> 1月   <span style="color:#ae81ff">1</span> 06:50 conf
+drwxr-xr-x <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">40</span> 1月   <span style="color:#ae81ff">1</span> 06:50 html
+drwxr-xr-x <span style="color:#ae81ff">2</span> root root   <span style="color:#ae81ff">6</span> 1月   <span style="color:#ae81ff">1</span> 06:50 logs
+drwxr-xr-x <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">19</span> 1月   <span style="color:#ae81ff">1</span> 06:50 sbin
+</code></pre></div><ul>
+<li>创建 nginx.service 文件</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat &lt; EOF &gt; nginx.service</span>
+<span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+Description<span style="color:#f92672">=</span>Nginx Server
+After<span style="color:#f92672">=</span>network.target
+After<span style="color:#f92672">=</span>network-online.target
+Wants<span style="color:#f92672">=</span>network-online.target
+
+<span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+Type<span style="color:#f92672">=</span>forking
+ExecStartPre<span style="color:#f92672">=</span>/opt/nginx/sbin/nginx -c /opt/nginx/conf/nginx.conf -p /opt/nginx -t
+ExecStart<span style="color:#f92672">=</span>/opt/nginx/sbin/nginx -c /opt/nginx/conf/nginx.conf -p /opt/nginx
+ExecReload<span style="color:#f92672">=</span>/opt/nginx/sbin/nginx -c /opt/nginx/conf/nginx.conf -p /opt/nginx -s reload
+PrivateTmp<span style="color:#f92672">=</span>true
+Restart<span style="color:#f92672">=</span>always
+RestartSec<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+StartLimitInterval<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+LimitNOFILE<span style="color:#f92672">=</span><span style="color:#ae81ff">65536</span>
+
+<span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+WantedBy<span style="color:#f92672">=</span>multi-user.target
+EOF
+
+<span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># cp nginx.service /etc/systemd/system/</span>
+<span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl enable nginx &amp;&amp; systemctl start nginx</span>
+
+<span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl status nginx</span>
+● nginx.service - Nginx Server
+   Loaded: loaded <span style="color:#f92672">(</span>/etc/systemd/system/nginx.service; disabled; vendor preset: disabled<span style="color:#f92672">)</span>
+   Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since 三 2020-01-01 06:59:14 CST; 5s ago
+  Process: <span style="color:#ae81ff">10052</span> ExecStart<span style="color:#f92672">=</span>/opt/nginx/sbin/nginx -c /opt/nginx/conf/nginx.conf -p /opt/nginx <span style="color:#f92672">(</span>code<span style="color:#f92672">=</span>exited, status<span style="color:#f92672">=</span>0/SUCCESS<span style="color:#f92672">)</span>
+  Process: <span style="color:#ae81ff">10051</span> ExecStartPre<span style="color:#f92672">=</span>/opt/nginx/sbin/nginx -c /opt/nginx/conf/nginx.conf -p /opt/nginx -t <span style="color:#f92672">(</span>code<span style="color:#f92672">=</span>exited, status<span style="color:#f92672">=</span>0/SUCCESS<span style="color:#f92672">)</span>
+ Main PID: <span style="color:#ae81ff">10053</span> <span style="color:#f92672">(</span>nginx<span style="color:#f92672">)</span>
+   CGroup: /system.slice/nginx.service
+           ├─10053 nginx: master process /opt/nginx/sbin/nginx -c /opt/nginx/conf/nginx.conf...
+           └─10054 nginx: worker process
+
+1月 <span style="color:#ae81ff">01</span> 06:59:14 nginx systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Starting Nginx Server...
+1月 <span style="color:#ae81ff">01</span> 06:59:14 nginx nginx<span style="color:#f92672">[</span>10051<span style="color:#f92672">]</span>: nginx: the configuration file /opt/nginx/conf/nginx.... ok
+1月 <span style="color:#ae81ff">01</span> 06:59:14 nginx nginx<span style="color:#f92672">[</span>10051<span style="color:#f92672">]</span>: nginx: configuration file /opt/nginx/conf/nginx.conf...ful
+1月 <span style="color:#ae81ff">01</span> 06:59:14 nginx systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Started Nginx Server.
+Hint: Some lines were ellipsized, use -l to show in full.
+
+<span style="color:#f92672">[</span>root@nginx ~<span style="color:#f92672">]</span><span style="color:#75715e"># netstat -ntlp | grep nginx</span>
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 0.0.0.0:80              0.0.0.0:*               LISTEN      10053/nginx: master
+</code></pre></div><h2 id="nginx-配置">Nginx 配置</h2>
+<h3 id="11-http-load-balancing">1.1 HTTP Load Balancing</h3>
+<ul>
+<li>使用 NGINX 的 HTTP 模块使用 upstream 块在 HTTP 服务器上进行负载均衡</li>
+</ul>
+<pre><code class="language-conf" data-lang="conf">upstream backend {
+    server 10.10.12.45:80       weight=1;
+    server app.example.com:80   weight=2;
+}
+server {
+    location / {
+        proxy_pass http://backend;
+    }
+}
+</code></pre><h3 id="12-tcp-load-balancing">1.2 TCP Load Balancing</h3>
+<ul>
+<li>使用 NGINX 的 stream 模块使用 upstream 块在 TCP 服务器上进行负载均衡</li>
+</ul>
+<pre><code class="language-conf" data-lang="conf">stream {
+    upstream mysql_read {
+        server read1.example.com:3306   weight=5;
+        server read2.example.com:3306;
+        server 10.10.12.34:3306         backup;
+    }
+
+    server {
+        listen 3306;
+        proxy_pass mysql_read;
+    }
+}
+</code></pre><h3 id="13-load-balancing-方法">1.3 Load-Balancing 方法</h3>
+<ul>
+<li>使用 NGINX 的负载平衡方法之一，例如least_conn, least_time, hash, ip_hash</li>
+</ul>
+<p>这里将后端 upstream 池的负载平衡算法设置为最少连接。所有负载平衡算法（通用散列除外）都将是独立的指令，如前面的示例。通用散列采用单个参数（可以是变量的串联）来构建散列。</p>
+<pre><code class="language-conf" data-lang="conf">upstream backend {
+    least_conn;
+    server backend.example.com;
+    server backend1.example.com;
+}
+</code></pre><p>并非所有请求或数据包都具有相同的权重。鉴于此，循环，甚至是先前示例中使用的加权循环，将不适合所有应用程序或交通流量的需要。NGINX提供了许多负载平衡算法，可用于适应特定的用例。 这些负载平衡算法或方法不仅可以选择，还可以配置。 以下负载平衡方法可用于 upstream HTTP，TCP 和 UDP 池：</p>
+<ol>
+<li>Round robin（轮询）：<br>
+默认负载平衡方法，按 upstream 池中服务器列表的顺序分配请求。对于加权循环，可以考虑权重，如果 upstream 服务器的容量变化，则可以使用加权循环。 权重的整数值越高，服务器在循环中的优势就越大。权重背后的算法只是加权平均的统计概率。循环法是默认的负载平衡算法，如果未指定其他算法，则使用该算法。</li>
+<li>Least connections（）：<br>
+另一种由 NGINX 提供的负载均衡方法。此方法通过将当前请求代理到具有通过 NGINX 代理的最少数量的打开连接的upstream服务器来平衡负载。在决定向哪个服务器发送连接时，最小连接（如循环）也会考虑权重。指令名称为 least_conn。</li>
+<li>Least time（）：<br>
+仅在 NGINX Plus 中可用，类似于最少连接，因为它代理具有最少数量的当前连接的upstream 服务器，但有利于具有最低平均响应时间的服务器。这种方法是最复杂的负载平衡算法之一，可满足高性能 Web 应用程序的需求。此算法是一个增加最少连接的值，因为少量连接并不一定意味着最快的响应。指令名称为 least_time。</li>
+<li>Generic hash（）：<br>
+管理员使用给定文本，请求或运行时的变量或两者来定义散列。NGINX 通过为当前请求生成哈希并将其放在 upstream 服务器上来分配服务器之间的负载。当您需要更多地控制发送请求的位置或确定哪些 upstream 服务器最有可能将数据缓存时，此方法非常有用。请注意，在池中添加或删除服务器时，将重新分配散列请求。该算法具有可选参数，一致，以最小化重新分布的影响。指令名称是 hash。</li>
+<li>IP hash（）：<br>
+仅支持HTTP，是最后一批。IP 哈希使用客户端 IP 地址作为哈希。与在通用散列中使用远程变量略有不同，此算法使用 IPv4 地址的前三个八位字节或整个 IPv6 地址。只要该服务器可用，此方法可确保客户端代理到同一个 upstream 服务器，这在会话状态受到关注且未由应用程序的共享内存处理时非常有用。 在分配散列时，此方法还会考虑权重参数。 指令名称为 ip_hash。</li>
+</ol>
+<h3 id="14-connection-limiting">1.4 Connection Limiting</h3>
+<ul>
+<li>使用 NGINX Plus 的 max_conns 参数限制 upstream 服务器的连接数</li>
+</ul>
+<pre><code class="language-conf" data-lang="conf">upstream backend {
+    zone backends 64k;
+    queue 750 timeout=30s;
+
+    server webserver1.example.com max_conns=25;
+    server webserver2.example.com max_conns=15;
+}
+</code></pre></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+  <div class="footer container-lg width-full p-responsive" role="contentinfo">
+    <div
+        class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+            <li class="mr-3 mr-lg-0">&copy;2019&nbsp;<b><a href="mailto: jeremytowne@163.com">JeremyTowne</a></b>
+            </li>
+        </ul>
+
+        <a aria-label="Homepage" title="ToDevOps" class="footer-octicon d-none d-lg-block mx-lg-4"
+            href="https://todevops.github.io/">
+            <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24"
+                aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+        </a>
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+        </ul>
+    </div>
+    <div class="d-flex flex-justify-center pb-6">
+        <span class="f6 text-gray-light"></span>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+    type="application/javascript" src="https://todevops.github.io/js/frameworks.js"></script>
+
+<script crossorigin="anonymous" async="async"
+    type="application/javascript" src="https://todevops.github.io/js/github-bootstrap.js"></script>
+<script>
+    let classs = ['pinned-item-desc', 'text-gray', 'text-small', 'd-block', 'mt-2', 'mb-3'];
+    const pinned_posts = document.getElementsByName('pinned-post');
+    for (let i = 0; i < pinned_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = pinned_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+    classs = [ 'd-inline-block', 'text-gray', 'mb-2', 'pr-4'];
+    const posts_posts = document.getElementsByName('posts-post');
+    for (let i = 0; i < posts_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = posts_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

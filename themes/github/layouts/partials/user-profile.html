@@ -1,0 +1,95 @@
+<div class="h-card col-lg-3 col-md-4 col-12 float-md-left pr-md-3 pr-xl-6" itemscope
+    itemtype="http://schema.org/Person">
+    <div class="user-profile-sticky-bar js-user-profile-sticky-bar">
+    </div>
+    <div class="clearfix mb-2">
+        <div class="float-left col-3 col-md-12 pr-3 pr-md-0">
+            <a itemprop="image" class="u-photo d-block position-relative" aria-hidden="true"
+                href="{{ "img/avatar.png" | absURL }}">
+                {{ with $.Site.Params.avatar }}
+                <img alt="" width="260" height="260" class="avatar width-full height-full rounded-2"
+                    src="{{ $.Site.Params.avatar  }}" />
+                {{ else }}
+
+                <img alt="" width="260" height="260" class="avatar width-full height-full rounded-2"
+                    src="{{ "img/avatar.png" | absURL }}" />
+                {{ end }}
+            </a>
+        </div>
+        <div class="float-left col-9 col-md-12 pl-2 pl-md-0">
+
+            <div class="vcard-names-container pt-1 pt-md-3 pb-1 pb-md-3 js-sticky js-user-profile-sticky-fields">
+                <h1 class="vcard-names">
+                    <span class="p-name vcard-fullname d-block overflow-hidden"
+                        itemprop="name">{{ .Site.Params.author }}</span>
+                    <span class="p-nickname vcard-username d-block"
+                        itemprop="additionalName">{{ .Site.Params.github }}</span>
+                </h1>
+            </div>
+
+            {{ if .Site.Params.github }}
+            <div class="user-profile-following-container js-user-profile-following-toggle mb-3">
+                <span class="user-following-container js-toggler-container js-social-container">
+                    <span class="follow">
+                        <input type="button" style="max-width: 100%" value="Follow"
+                            class="btn btn-block top-0 js-sticky js-user-profile-follow-button mb-2  js-toggler-target"
+                            title="Follow"
+                            onclick="window.location.href = 'https://github.com/{{ .Site.Params.github }}'" />
+                    </span>
+                    <span class="unfollow">
+                        <input type="button" style="max-width: 100%" value="Unfollow"
+                            class="btn btn-block top-0 js-sticky js-user-profile-follow-button mb-2  js-toggler-target"
+                            title="Unfollow"
+                            onclick="window.location.href = 'https://github.com/{{ .Site.Params.github }}'" />
+                    </span>
+                </span>
+            </div>
+            {{ end }}
+
+            <div class="border-top py-3 clearfix hide-sm hide-md">
+                <h2 class="mb-1 h4">Social Links</h2>
+
+                <a class="avatar-group-item" href="https://github.com/{{ .Site.Params.github }}">
+                    <img src="{{ "img/github.png" | absURL }}" class="avatar" width="35" height="35">
+                </a>
+
+                {{ if .Site.Params.Baidu}}
+                <a class="avatar-group-item" href="{{ .Site.Params.Baidu }}">
+                    <img src="{{ "img/baidu.png" | absURL }}" class="avatar" width="35" height="35">
+                </a>
+                {{ end }}
+
+                {{ if .Site.Params.Wechat}}
+                <a class="avatar-group-item" href="{{ .Site.Params.Wechat }}">
+                    <img src="{{ "img/wechat.png" | absURL }}" class="avatar" width="35" height="35">
+                </a>
+                {{ end }}
+
+                {{ if .Site.Params.QQ}}
+                <a class="avatar-group-item" href="{{ .Site.Params.QQ }}">
+                    <img src="{{ "img/qq.png" | absURL }}" class="avatar" width="35" height="35">
+                </a>
+                {{ end }}
+
+                {{ if .Site.Params.Weibo}}
+                <a class="avatar-group-item" href="{{ .Site.Params.Weibo }}">
+                    <img src="{{ "img/weibo.png" | absURL }}" class="avatar" width="35" height="35">
+                </a>
+                {{ end }}
+
+                {{ if .Site.Params.zhihu}}
+                <a class="avatar-group-item" href="{{ .Site.Params.zhihu }}">
+                    <img src="{{ "img/zhihu.png" | absURL }}" class="avatar" width="35" height="35">
+                </a>
+                {{ end }}
+
+                <a class="avatar-group-item" href="{{ "posts/index.xml" | absURL }}">
+                    <img src="{{ "img/rss.png" | absURL }}" class="avatar" width="35" height="35">
+                </a>
+            </div>
+
+            <div data-test-selector="profile-sponsorships">
+            </div>
+        </div>
+    </div>
+</div>

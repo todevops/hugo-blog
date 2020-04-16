@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet"
+        href="https://todevops.github.io/css/frameworks.css" />
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet" href="https://todevops.github.io/css/github.css" />
+    <meta name="viewport" content="width=device-width">
+
+    <title>OpenLDAP 安装指南 - ToDevOps</title>
+
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://todevops.github.io/img/favicon.ico">
+    <meta name="theme-color" content="#1e2327">
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-456-789', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body class="env-production emoji-size-boost page-responsive page-profile">
+  <div class="position-relative js-header-wrapper ">
+    <span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar">
+        <span class="progress-pjax-loader-bar top-0 left-0" style="width: 0%;"></span>
+    </span>
+    <header class="Header js-details-container Details flex-wrap flex-lg-nowrap p-responsive" role="banner">
+        <div class="Header-item d-none d-lg-flex">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+        <div
+            class="Header-item Header-item--full flex-column flex-lg-row width-full flex-order-2 flex-lg-order-none mr-0 mr-lg-3 mt-3 mt-lg-0 Details-content--hidden">
+            <div class="header-search flex-self-stretch flex-lg-self-auto mr-0 mr-lg-3 mb-3 mb-lg-0 scoped-search site-scoped-search js-site-search position-relative js-jump-to"
+                role="combobox" aria-owns="jump-to-results" aria-label="Search or jump to" aria-haspopup="listbox"
+                aria-expanded="false">
+                <div class="position-relative">
+                </div>
+            </div>
+        </div>
+        <div class="Header-item Header-item--full flex-justify-center d-lg-none position-relative"
+            style="margin-right: auto;">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+    </header>
+</div>
+
+<div id="start-of-content" class="show-on-focus"></div>
+<div id="js-flash-container">
+</div>
+  
+<div class="application-main " data-commit-hovercards-enabled="">
+    <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode" class="">
+        <main id="js-repo-pjax-container" data-pjax-container="">
+            <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav pt-0 pt-lg-4 ">
+                <div class="repohead-details-container clearfix container-lg p-responsive d-none d-lg-block">
+                    <div class="mb-3 d-flex">
+                        <h1 class="public css-truncate float-none flex-auto width-fit pl-0">
+                            <a class="avatar mr-1" href="https://todevops.github.io/about/">
+                            
+
+                                <img
+                                    src="https://todevops.github.io/images/avatar.png" width="26" height="26">
+                            
+                            </a>
+                            <span class="author"><a
+                                    href="https://todevops.github.io/">JeremyTowne</a></span>
+                            <span class="path-divider">/</span>
+                            <strong itemprop="name" class="css-truncate-target" style="max-width: 410px"><a
+                                    href="https://todevops.github.io/posts/openldap/">OpenLDAP 安装指南</a></strong>
+
+                            <div class="d-block text-small text-gray">
+                                Created <time-ago datetime="2019-12-27" class="no-wrap"
+                                    title="Created at 2019/12/27">
+                                    2019-12-27</time-ago>
+                                <span class="file-info-divider"></span>
+                                Modifyed <time-ago datetime="2019-12-27" class="no-wrap"
+                                    title="Modifyed  at 2019/12/27">
+                                    2019-12-27</time-ago>
+                            </div>
+                        </h1>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="container-lg clearfix new-discussion-timeline experiment-repo-nav  p-responsive">
+                <div class="repository-content ">
+                    <div class="Box mt-3 position-relative">
+                        <div class="Box-header py-2 d-flex flex-column flex-shrink-0 flex-md-row flex-md-items-center">
+                            <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                                1540 Words
+                                
+                            </div>
+                        </div>
+
+                        <div id="readme" class="Box-body readme blob instapaper_body js-code-block-container">
+                            <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"><p>CentOS 7 OpenLDAP 安装配置指南</p>
+<h2 id="1-安装-openldap">1. 安装 openldap</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum -y install openldap compat-openldap openldap-clients openldap-servers openldap-servers-sql openldap-devel migrationtools</span>
+</code></pre></div><h3 id="查看版本">查看版本</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># slapd -VV</span>
+@<span style="color:#f92672">(</span><span style="color:#75715e">#) $OpenLDAP: slapd 2.4.44 (Jan 29 2019 17:42:45) $</span>
+	mockbuild@x86-01.bsys.centos.org:/builddir/build/BUILD/openldap-2.4.44/openldap-2.4.44/servers/slapd
+</code></pre></div><h3 id="为默认用户设置密码">为默认用户设置密码</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># slappasswd</span>
+New password:
+Re-enter new password:
+<span style="color:#f92672">{</span>SSHA<span style="color:#f92672">}</span>P+NaHJ1IQAM/17rDCIK8i2Klm3rStDVo
+</code></pre></div><h2 id="2-配置-openldap">2. 配置 openldap</h2>
+<h3 id="修改-olcdatabase2hdbldif-文件">修改 <code>olcDatabase={2}hdb.ldif</code> 文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># vim /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{2\}hdb.ldif</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.</span>
+<span style="color:#75715e"># CRC32 2df1c260</span>
+dn: olcDatabase<span style="color:#f92672">={</span>2<span style="color:#f92672">}</span>hdb
+objectClass: olcDatabaseConfig
+objectClass: olcHdbConfig
+olcDatabase: <span style="color:#f92672">{</span>2<span style="color:#f92672">}</span>hdb
+olcDbDirectory: /var/lib/ldap
+<span style="color:#75715e"># olcSuffix: dc=my-domain,dc=com</span>
+olcSuffix: dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+<span style="color:#75715e"># olcRootDN: cn=Manager,dc=my-domain,dc=com</span>
+olcRootDN: cn<span style="color:#f92672">=</span>Manager,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+olcDbIndex: objectClass eq,pres
+olcDbIndex: ou,cn,mail,surname,givenname eq,pres,sub
+structuralObjectClass: olcHdbConfig
+entryUUID: 7b00e3c0-bcc6-1039-927c-c144385599c7
+creatorsName: cn<span style="color:#f92672">=</span>config
+createTimestamp: 20191227073020Z
+entryCSN: 20191227073020.070906Z#000000#000#000000
+modifiersName: cn<span style="color:#f92672">=</span>config
+modifyTimestamp: 20191227073020Z
+<span style="color:#75715e"># add</span>
+olcRootPW: <span style="color:#f92672">{</span>SSHA<span style="color:#f92672">}</span>P+NaHJ1IQAM/17rDCIK8i2Klm3rStDVo
+</code></pre></div><h3 id="修改-olcdatabase1monitorldif-文件">修改 <code>olcDatabase={1}monitor.ldif</code> 文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># vim /etc/openldap/slapd.d/cn\=config/olcDatabase\=\{1\}monitor.ldif</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.</span>
+<span style="color:#75715e"># CRC32 cdc0bae3</span>
+dn: olcDatabase<span style="color:#f92672">={</span>1<span style="color:#f92672">}</span>monitor
+objectClass: olcDatabaseConfig
+olcDatabase: <span style="color:#f92672">{</span>1<span style="color:#f92672">}</span>monitor
+<span style="color:#75715e"># olcAccess: {0}to * by dn.base=&#34;gidNumber=0+uidNumber=0,cn=peercred,cn=extern</span>
+<span style="color:#75715e">#  al,cn=auth&#34; read by dn.base=&#34;cn=Manager,dc=my-domain,dc=com&#34; read by * none</span>
+olcAccess: <span style="color:#f92672">{</span>0<span style="color:#f92672">}</span>to * by dn.base<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gidNumber=0+uidNumber=0,cn=peercred,cn=extern
+</span><span style="color:#e6db74"> al,cn=auth&#34;</span> read by dn.base<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cn=Manager,dc=example,dc=com&#34;</span> read by * none
+structuralObjectClass: olcDatabaseConfig
+entryUUID: 7b00dc72-bcc6-1039-927b-c144385599c7
+creatorsName: cn<span style="color:#f92672">=</span>config
+createTimestamp: 20191227073020Z
+entryCSN: 20191227073020.070787Z#000000#000#000000
+modifiersName: cn<span style="color:#f92672">=</span>config
+modifyTimestamp: 20191227073020Z
+</code></pre></div><h3 id="验证配置文件是否正确">验证配置文件是否正确</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># slaptest -u</span>
+5e05b57d ldif_read_file: checksum error on <span style="color:#e6db74">&#34;/etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif&#34;</span>
+5e05b57d ldif_read_file: checksum error on <span style="color:#e6db74">&#34;/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif&#34;</span>
+config file testing succeeded
+</code></pre></div><h3 id="启动服务并设置开机启动">启动服务并设置开机启动</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl start slapd &amp;&amp; systemctl enable slapd</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl status slapd</span>
+● slapd.service - OpenLDAP Server Daemon
+   Loaded: loaded <span style="color:#f92672">(</span>/usr/lib/systemd/system/slapd.service; enabled; vendor preset: disabled<span style="color:#f92672">)</span>
+   Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since 五 2019-12-27 15:41:35 CST; 4s ago
+     Docs: man:slapd
+           man:slapd-config
+           man:slapd-hdb
+           man:slapd-mdb
+           file:///usr/share/doc/openldap-servers/guide.html
+  Process: <span style="color:#ae81ff">1783</span> ExecStart<span style="color:#f92672">=</span>/usr/sbin/slapd -u ldap -h <span style="color:#e6db74">${</span>SLAPD_URLS<span style="color:#e6db74">}</span> $SLAPD_OPTIONS <span style="color:#f92672">(</span>code<span style="color:#f92672">=</span>exited, status<span style="color:#f92672">=</span>0/SUCCESS<span style="color:#f92672">)</span>
+  Process: <span style="color:#ae81ff">1768</span> ExecStartPre<span style="color:#f92672">=</span>/usr/libexec/openldap/check-config.sh <span style="color:#f92672">(</span>code<span style="color:#f92672">=</span>exited, status<span style="color:#f92672">=</span>0/SUCCESS<span style="color:#f92672">)</span>
+ Main PID: <span style="color:#ae81ff">1786</span> <span style="color:#f92672">(</span>slapd<span style="color:#f92672">)</span>
+   CGroup: /system.slice/slapd.service
+           └─1786 /usr/sbin/slapd -u ldap -h ldapi:/// ldap:///
+
+12月 <span style="color:#ae81ff">27</span> 15:41:32 ldap.example.com systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Starting OpenLDAP Server Daemon...
+12月 <span style="color:#ae81ff">27</span> 15:41:32 ldap.example.com runuser<span style="color:#f92672">[</span>1771<span style="color:#f92672">]</span>: pam_unix<span style="color:#f92672">(</span>runuser:session<span style="color:#f92672">)</span>: session opened <span style="color:#66d9ef">for</span> user ldap by <span style="color:#f92672">(</span>uid<span style="color:#f92672">=</span>0<span style="color:#f92672">)</span>
+12月 <span style="color:#ae81ff">27</span> 15:41:35 ldap.example.com slapd<span style="color:#f92672">[</span>1783<span style="color:#f92672">]</span>: @<span style="color:#f92672">(</span><span style="color:#75715e">#) $OpenLDAP: slapd 2.4.44 (Jan 29 2019 17:42:45) $</span>
+                                                        mockbuild@x86-01.bsys.centos.org:/builddir/build/BUILD/openldap-2.4.44/openldap-2.4.44/servers/slapd
+12月 <span style="color:#ae81ff">27</span> 15:41:35 ldap.example.com slapd<span style="color:#f92672">[</span>1783<span style="color:#f92672">]</span>: ldif_read_file: checksum error on <span style="color:#e6db74">&#34;/etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif&#34;</span>
+12月 <span style="color:#ae81ff">27</span> 15:41:35 ldap.example.com slapd<span style="color:#f92672">[</span>1783<span style="color:#f92672">]</span>: ldif_read_file: checksum error on <span style="color:#e6db74">&#34;/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif&#34;</span>
+12月 <span style="color:#ae81ff">27</span> 15:41:35 ldap.example.com slapd<span style="color:#f92672">[</span>1783<span style="color:#f92672">]</span>: tlsmc_get_pin: INFO: Please note the extracted key file will not be protected with a PIN any more, however it will be still prot...permissions.
+12月 <span style="color:#ae81ff">27</span> 15:41:35 ldap.example.com slapd<span style="color:#f92672">[</span>1786<span style="color:#f92672">]</span>: hdb_db_open: warning - no DB_CONFIG file found in directory /var/lib/ldap: <span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>.
+                                                Expect poor performance <span style="color:#66d9ef">for</span> suffix <span style="color:#e6db74">&#34;dc=example,dc=com&#34;</span>.
+12月 <span style="color:#ae81ff">27</span> 15:41:35 ldap.example.com slapd<span style="color:#f92672">[</span>1786<span style="color:#f92672">]</span>: slapd starting
+12月 <span style="color:#ae81ff">27</span> 15:41:35 ldap.example.com systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Started OpenLDAP Server Daemon.
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre></div><h3 id="查看监听端口">查看监听端口</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># netstat -ntlp | grep slapd</span>
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 0.0.0.0:389             0.0.0.0:*               LISTEN      1786/slapd
+tcp6       <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> :::389                  :::*                    LISTEN      1786/slapd
+</code></pre></div><h3 id="配置-openldap-数据库">配置 openldap 数据库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># chown ldap:ldap -R /var/lib/ldap</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># chmod 700 -R /var/lib/ldap</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ll /var/lib/ldap/</span>
+总用量 <span style="color:#ae81ff">324</span>
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap     <span style="color:#ae81ff">2048</span> 12月 <span style="color:#ae81ff">27</span> 15:41 alock
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap   <span style="color:#ae81ff">262144</span> 12月 <span style="color:#ae81ff">27</span> 15:41 __db.001
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap    <span style="color:#ae81ff">32768</span> 12月 <span style="color:#ae81ff">27</span> 15:41 __db.002
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap    <span style="color:#ae81ff">49152</span> 12月 <span style="color:#ae81ff">27</span> 15:41 __db.003
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap      <span style="color:#ae81ff">845</span> 12月 <span style="color:#ae81ff">27</span> 15:44 DB_CONFIG
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap     <span style="color:#ae81ff">8192</span> 12月 <span style="color:#ae81ff">27</span> 15:41 dn2id.bdb
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap    <span style="color:#ae81ff">32768</span> 12月 <span style="color:#ae81ff">27</span> 15:41 id2entry.bdb
+-rwx------. <span style="color:#ae81ff">1</span> ldap ldap <span style="color:#ae81ff">10485760</span> 12月 <span style="color:#ae81ff">27</span> 15:41 log.0000000001
+</code></pre></div><h3 id="导入基本-schema">导入基本 schema</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif</span>
+SASL/EXTERNAL authentication started
+SASL username: gidNumber<span style="color:#f92672">=</span>0+uidNumber<span style="color:#f92672">=</span>0,cn<span style="color:#f92672">=</span>peercred,cn<span style="color:#f92672">=</span>external,cn<span style="color:#f92672">=</span>auth
+SASL SSF: <span style="color:#ae81ff">0</span>
+adding new entry <span style="color:#e6db74">&#34;cn=cosine,cn=schema,cn=config&#34;</span>
+
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif</span>
+SASL/EXTERNAL authentication started
+SASL username: gidNumber<span style="color:#f92672">=</span>0+uidNumber<span style="color:#f92672">=</span>0,cn<span style="color:#f92672">=</span>peercred,cn<span style="color:#f92672">=</span>external,cn<span style="color:#f92672">=</span>auth
+SASL SSF: <span style="color:#ae81ff">0</span>
+adding new entry <span style="color:#e6db74">&#34;cn=nis,cn=schema,cn=config&#34;</span>
+
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif</span>
+SASL/EXTERNAL authentication started
+SASL username: gidNumber<span style="color:#f92672">=</span>0+uidNumber<span style="color:#f92672">=</span>0,cn<span style="color:#f92672">=</span>peercred,cn<span style="color:#f92672">=</span>external,cn<span style="color:#f92672">=</span>auth
+SASL SSF: <span style="color:#ae81ff">0</span>
+adding new entry <span style="color:#e6db74">&#34;cn=inetorgperson,cn=schema,cn=config&#34;</span>
+</code></pre></div><h2 id="3-开启-openldap-日志访问功能">3. 开启 openldap 日志访问功能</h2>
+<blockquote>
+<p>默认情况下 openldap 没有启用日志记录功能，在实际使用过程中，为了定位问题，需要使用到 openldap 日志。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat &gt; /root/loglevel.ldif &lt;&lt; &#34;EOF&#34;</span>
+dn: cn<span style="color:#f92672">=</span>config
+changetype: modify
+replace: olcLogLevel
+olcLogLevel: stats
+EOF
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapmodify -Y EXTERNAL -H ldapi:/// -f /root/loglevel.ldif</span>
+SASL/EXTERNAL authentication started
+SASL username: gidNumber<span style="color:#f92672">=</span>0+uidNumber<span style="color:#f92672">=</span>0,cn<span style="color:#f92672">=</span>peercred,cn<span style="color:#f92672">=</span>external,cn<span style="color:#f92672">=</span>auth
+SASL SSF: <span style="color:#ae81ff">0</span>
+modifying entry <span style="color:#e6db74">&#34;cn=config&#34;</span>
+
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl restart slapd</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat &gt;&gt; /etc/rsyslog.conf &lt;&lt; &#34;EOF&#34;</span>
+local4.* /var/log/slapd.log
+EOF
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl restart rsyslog</span>
+</code></pre></div><h2 id="4-安装和配置-phpldapadmin">4. 安装和配置 phpldapadmin</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum -y install httpd php php-ldap php-gd php-mbstring php-pear php-bcmath php-xml</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum -y install epel-release</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># yum -y install phpldapadmin</span>
+</code></pre></div><ul>
+<li>修改配置文件</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># vim /etc/phpldapadmin/config.php</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">397</span> $servers-&gt;setValue<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;login&#39;</span>,<span style="color:#e6db74">&#39;attr&#39;</span>,<span style="color:#e6db74">&#39;dn&#39;</span><span style="color:#f92672">)</span>;
+<span style="color:#ae81ff">398</span> // $servers-&gt;setValue<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;login&#39;</span>,<span style="color:#e6db74">&#39;attr&#39;</span>,<span style="color:#e6db74">&#39;uid&#39;</span><span style="color:#f92672">)</span>;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># vim /etc/httpd/conf.d/phpldapadmin.conf</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">#
+<span style="color:#75715e">#  Web-based tool for managing LDAP servers</span>
+#
+
+Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
+Alias /ldapadmin /usr/share/phpldapadmin/htdocs
+
+&lt;Directory /usr/share/phpldapadmin/htdocs&gt;
+  &lt;IfModule mod_authz_core.c&gt;
+    <span style="color:#75715e"># Apache 2.4</span>
+    Require local
+    Require ip 192.168.33.1
+  &lt;/IfModule&gt;
+  &lt;IfModule !mod_authz_core.c&gt;
+    <span style="color:#75715e"># Apache 2.2</span>
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+    Allow from ::1
+  &lt;/IfModule&gt;
+&lt;/Directory&gt;
+</code></pre></div><ul>
+<li>启动服务并设置开机启动</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># systemctl enable httpd &amp;&amp; systemctl start httpd</span>
+</code></pre></div><ul>
+<li>浏览器访问
+<ul>
+<li>主页
+<img src="/resources/openldap/openldap01.png" alt=""></li>
+<li>登陆
+<img src="/resources/openldap/openldap02.png" alt=""></li>
+<li>导航
+<img src="/resources/openldap/openldap03.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="5-添加用户">5. 添加用户</h2>
+<h3 id="修改-usrsharemigrate_commonph-文件">修改 <code>/usr/share/migrate_common.ph</code> 文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># vim /usr/share/migrationtools/migrate_common.ph</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Default DNS domain</span>
+<span style="color:#75715e"># $DEFAULT_MAIL_DOMAIN = &#34;padl.com&#34;;</span>
+$DEFAULT_MAIL_DOMAIN <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;example.com&#34;</span>;
+
+<span style="color:#75715e"># Default base</span>
+<span style="color:#75715e"># $DEFAULT_BASE = &#34;dc=padl,dc=com&#34;;</span>
+$DEFAULT_BASE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dc=example,dc=com&#34;</span>;
+
+<span style="color:#75715e"># Turn this on for inetLocalMailReceipient</span>
+<span style="color:#75715e"># sendmail support; add the following to</span>
+<span style="color:#75715e"># sendmail.mc (thanks to Petr@Kristof.CZ):</span>
+<span style="color:#75715e">##### CUT HERE #####</span>
+<span style="color:#75715e">#define(`confLDAP_DEFAULT_SPEC&#39;,`-h &#34;ldap.padl.com&#34;&#39;)dnl</span>
+<span style="color:#75715e">#LDAPROUTE_DOMAIN_FILE(`/etc/mail/ldapdomains&#39;)dnl</span>
+<span style="color:#75715e">#FEATURE(ldap_routing)dnl</span>
+<span style="color:#75715e">##### CUT HERE #####</span>
+<span style="color:#75715e"># where /etc/mail/ldapdomains contains names of ldap_routed</span>
+<span style="color:#75715e"># domains (similiar to MASQUERADE_DOMAIN_FILE).</span>
+<span style="color:#75715e"># $DEFAULT_MAIL_HOST = &#34;mail.padl.com&#34;;</span>
+
+<span style="color:#75715e"># turn this on to support more general object clases</span>
+<span style="color:#75715e"># such as person.</span>
+<span style="color:#75715e"># $EXTENDED_SCHEMA = 0;</span>
+$EXTENDED_SCHEMA <span style="color:#f92672">=</span> 1;
+</code></pre></div><h3 id="添加用户及用户组">添加用户及用户组</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># groupadd ldapgroup1</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># groupadd ldapgroup2</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># useradd -g ldapgroup1 ldapuser1</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># useradd -g ldapgroup2 ldapuser2</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># echo &#34;ldap&#34; | passwd --stdin ldapuser1</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># echo &#34;ldap&#34; | passwd --stdin ldapuser2</span>
+</code></pre></div><h3 id="提取用户和组">提取用户和组</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat /etc/passwd | grep ldapuser &gt; users</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat users</span>
+
+ldapuser1:x:1000:1000::/home/ldapuser1:/bin/bash
+ldapuser2:x:1001:1001::/home/ldapuser2:/bin/bash
+
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat /etc/group | grep ldapgroup &gt; groups</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat groups</span>
+
+ldapgroup1:x:1000:
+ldapgroup2:x:1001:
+</code></pre></div><h3 id="生成用户和组的-ldif-文件">生成用户和组的 <code>ldif</code> 文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># /usr/share/migrationtools/migrate_passwd.pl /root/users &gt; /root/users.ldif</span>
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># /usr/share/migrationtools/migrate_group.pl /root/groups &gt; /root/groups.ldif</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat users.ldif</span>
+dn: uid<span style="color:#f92672">=</span>ldapuser1,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+uid: ldapuser1
+cn: ldapuser1
+sn: ldapuser1
+mail: ldapuser1@example.com
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+objectClass: shadowAccount
+userPassword: <span style="color:#f92672">{</span>crypt<span style="color:#f92672">}</span>$6$ab3EWxCv$w/1qc6F3.z4PT0CLHQeqCQdxEUxbKHQBboBFprgz3HdaoJ8flCSmSjQ7yhTzGCoB3wUhJYT6bSVkpJENqPNtq/
+shadowLastChange: <span style="color:#ae81ff">18257</span>
+shadowMin: <span style="color:#ae81ff">0</span>
+shadowMax: <span style="color:#ae81ff">99999</span>
+shadowWarning: <span style="color:#ae81ff">7</span>
+loginShell: /bin/bash
+uidNumber: <span style="color:#ae81ff">1000</span>
+gidNumber: <span style="color:#ae81ff">1000</span>
+homeDirectory: /home/ldapuser1
+
+dn: uid<span style="color:#f92672">=</span>ldapuser2,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+uid: ldapuser2
+cn: ldapuser2
+sn: ldapuser2
+mail: ldapuser2@example.com
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+objectClass: shadowAccount
+userPassword: <span style="color:#f92672">{</span>crypt<span style="color:#f92672">}</span>$6$Lh9DKEZ0$qHpMrkzDYLuGhYmq4OLY2uuxv1Oj8TgiwsYs9CKPTMw0kzwGs0EekygLca27hHozJ04AMxE3cONNovcCrwti2/
+shadowLastChange: <span style="color:#ae81ff">18257</span>
+shadowMin: <span style="color:#ae81ff">0</span>
+shadowMax: <span style="color:#ae81ff">99999</span>
+shadowWarning: <span style="color:#ae81ff">7</span>
+loginShell: /bin/bash
+uidNumber: <span style="color:#ae81ff">1001</span>
+gidNumber: <span style="color:#ae81ff">1001</span>
+homeDirectory: /home/ldapuser2
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat groups.ldif</span>
+dn: cn<span style="color:#f92672">=</span>ldapgroup1,ou<span style="color:#f92672">=</span>Group,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+objectClass: posixGroup
+objectClass: top
+cn: ldapgroup1
+userPassword: <span style="color:#f92672">{</span>crypt<span style="color:#f92672">}</span>x
+gidNumber: <span style="color:#ae81ff">1000</span>
+
+dn: cn<span style="color:#f92672">=</span>ldapgroup2,ou<span style="color:#f92672">=</span>Group,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+objectClass: posixGroup
+objectClass: top
+cn: ldapgroup2
+userPassword: <span style="color:#f92672">{</span>crypt<span style="color:#f92672">}</span>x
+gidNumber: <span style="color:#ae81ff">1001</span>
+</code></pre></div><h3 id="导入用户及用户组到-openldap-数据库">导入用户及用户组到 <code>openldap</code> 数据库</h3>
+<blockquote>
+<p>尽管已经把用户和用户组信息导入到 openldap 数据库中。但目前 openldap 用户和组之间是没有任何关联的。要把 openldap 数据库中用户和组关联起来需要做单独配置</p>
+</blockquote>
+<ul>
+<li>导入基础数据库</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat &gt; /root/base.ldif &lt;&lt; EOF</span>
+dn: dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+o: example com
+dc: example
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+
+dn: cn<span style="color:#f92672">=</span>Manager,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+cn: Manager
+objectClass: organizationalRole
+description: Directory Manager
+
+dn: ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+ou: People
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou<span style="color:#f92672">=</span>Group,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+ou: Group
+objectClass: top
+objectClass: organizationalUnit
+EOF
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapadd -x -w &#34;ldap&#34; -D &#34;cn=Manager,dc=example,dc=com&#34; -f /root/base.ldif</span>
+adding new entry <span style="color:#e6db74">&#34;dc=example,dc=com&#34;</span>
+
+adding new entry <span style="color:#e6db74">&#34;cn=Manager,dc=example,dc=com&#34;</span>
+
+adding new entry <span style="color:#e6db74">&#34;ou=People,dc=example,dc=com&#34;</span>
+
+adding new entry <span style="color:#e6db74">&#34;ou=Group,dc=example,dc=com&#34;</span>
+</code></pre></div><ul>
+<li>导入用户</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapadd -x -w &#34;ldap&#34; -D &#34;cn=Manager,dc=example,dc=com&#34; -f /root/users.ldif</span>
+adding new entry <span style="color:#e6db74">&#34;uid=ldapuser1,ou=People,dc=example,dc=com&#34;</span>
+
+adding new entry <span style="color:#e6db74">&#34;uid=ldapuser2,ou=People,dc=example,dc=com&#34;</span>
+</code></pre></div><ul>
+<li>导入组</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapadd -x -w &#34;ldap&#34; -D &#34;cn=Manager,dc=example,dc=com&#34; -f /root/groups.ldif</span>
+adding new entry <span style="color:#e6db74">&#34;cn=ldapgroup1,ou=Group,dc=example,dc=com&#34;</span>
+
+adding new entry <span style="color:#e6db74">&#34;cn=ldapgroup2,ou=Group,dc=example,dc=com&#34;</span>
+</code></pre></div><ul>
+<li>将用户加入到用户组</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat &gt; add_user_to_groups.ldif &lt;&lt; &#34;EOF&#34;</span>
+dn: cn<span style="color:#f92672">=</span>ldapgroup1,ou<span style="color:#f92672">=</span>Group,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+changetype: modify
+add: memberuid
+memberuid: ldapuser1
+
+dn: cn<span style="color:#f92672">=</span>ldapgroup2,ou<span style="color:#f92672">=</span>Group,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+changetype: modify
+add: memberuid
+memberuid: ldapuser2
+EOF
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapadd -x -w &#34;ldap&#34; -D &#34;cn=Manager,dc=example,dc=com&#34; -f /root/add_user_to_groups.ldif</span>
+modifying entry <span style="color:#e6db74">&#34;cn=ldapgroup1,ou=Group,dc=example,dc=com&#34;</span>
+modifying entry <span style="color:#e6db74">&#34;cn=ldapgroup2,ou=Group,dc=example,dc=com&#34;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapsearch -LLL -x -D &#39;cn=Manager,dc=example,dc=com&#39; -w &#34;ldap&#34; -b &#39;dc=example,dc=com&#39; &#39;cn=ldapgroup1&#39;</span>
+dn: cn<span style="color:#f92672">=</span>ldapgroup1,ou<span style="color:#f92672">=</span>Group,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+objectClass: posixGroup
+objectClass: top
+cn: ldapgroup1
+userPassword:: e2NyeXB0fXg<span style="color:#f92672">=</span>
+gidNumber: <span style="color:#ae81ff">1000</span>
+memberUid: ldapuser1
+
+<span style="color:#f92672">[</span>root@ldap ~<span style="color:#f92672">]</span><span style="color:#75715e"># ldapsearch -LLL -x -D &#39;cn=Manager,dc=example,dc=com&#39; -w &#34;ldap&#34; -b &#39;dc=example,dc=com&#39; &#39;cn=ldapgroup2&#39;</span>
+dn: cn<span style="color:#f92672">=</span>ldapgroup2,ou<span style="color:#f92672">=</span>Group,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+objectClass: posixGroup
+objectClass: top
+cn: ldapgroup2
+userPassword:: e2NyeXB0fXg<span style="color:#f92672">=</span>
+gidNumber: <span style="color:#ae81ff">1001</span>
+memberUid: ldapuser2
+</code></pre></div><ul>
+<li>phpldapadmin 导航
+<img src="/resources/openldap/openldap04.png" alt=""></li>
+</ul></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+  <div class="footer container-lg width-full p-responsive" role="contentinfo">
+    <div
+        class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+            <li class="mr-3 mr-lg-0">&copy;2019&nbsp;<b><a href="mailto: jeremytowne@163.com">JeremyTowne</a></b>
+            </li>
+        </ul>
+
+        <a aria-label="Homepage" title="ToDevOps" class="footer-octicon d-none d-lg-block mx-lg-4"
+            href="https://todevops.github.io/">
+            <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24"
+                aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+        </a>
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+        </ul>
+    </div>
+    <div class="d-flex flex-justify-center pb-6">
+        <span class="f6 text-gray-light"></span>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+    type="application/javascript" src="https://todevops.github.io/js/frameworks.js"></script>
+
+<script crossorigin="anonymous" async="async"
+    type="application/javascript" src="https://todevops.github.io/js/github-bootstrap.js"></script>
+<script>
+    let classs = ['pinned-item-desc', 'text-gray', 'text-small', 'd-block', 'mt-2', 'mb-3'];
+    const pinned_posts = document.getElementsByName('pinned-post');
+    for (let i = 0; i < pinned_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = pinned_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+    classs = [ 'd-inline-block', 'text-gray', 'mb-2', 'pr-4'];
+    const posts_posts = document.getElementsByName('posts-post');
+    for (let i = 0; i < posts_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = posts_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

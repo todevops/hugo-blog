@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet"
+        href="https://todevops.github.io/css/frameworks.css" />
+    <link crossorigin="anonymous" media="all"
+        rel="stylesheet" href="https://todevops.github.io/css/github.css" />
+    <meta name="viewport" content="width=device-width">
+
+    <title>Git 指南 - ToDevOps</title>
+
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://todevops.github.io/img/favicon.ico">
+    <meta name="theme-color" content="#1e2327">
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-456-789', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body class="env-production emoji-size-boost page-responsive page-profile">
+  <div class="position-relative js-header-wrapper ">
+    <span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar">
+        <span class="progress-pjax-loader-bar top-0 left-0" style="width: 0%;"></span>
+    </span>
+    <header class="Header js-details-container Details flex-wrap flex-lg-nowrap p-responsive" role="banner">
+        <div class="Header-item d-none d-lg-flex">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+        <div
+            class="Header-item Header-item--full flex-column flex-lg-row width-full flex-order-2 flex-lg-order-none mr-0 mr-lg-3 mt-3 mt-lg-0 Details-content--hidden">
+            <div class="header-search flex-self-stretch flex-lg-self-auto mr-0 mr-lg-3 mb-3 mb-lg-0 scoped-search site-scoped-search js-site-search position-relative js-jump-to"
+                role="combobox" aria-owns="jump-to-results" aria-label="Search or jump to" aria-haspopup="listbox"
+                aria-expanded="false">
+                <div class="position-relative">
+                </div>
+            </div>
+        </div>
+        <div class="Header-item Header-item--full flex-justify-center d-lg-none position-relative"
+            style="margin-right: auto;">
+            <a class="Header-link" href="https://todevops.github.io/" aria-label="Homepage"
+                data-ga-click="Header, go to dashboard, icon:logo">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                    width="32" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+            </a>
+        </div>
+    </header>
+</div>
+
+<div id="start-of-content" class="show-on-focus"></div>
+<div id="js-flash-container">
+</div>
+  
+<div class="application-main " data-commit-hovercards-enabled="">
+    <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode" class="">
+        <main id="js-repo-pjax-container" data-pjax-container="">
+            <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav pt-0 pt-lg-4 ">
+                <div class="repohead-details-container clearfix container-lg p-responsive d-none d-lg-block">
+                    <div class="mb-3 d-flex">
+                        <h1 class="public css-truncate float-none flex-auto width-fit pl-0">
+                            <a class="avatar mr-1" href="https://todevops.github.io/about/">
+                            
+
+                                <img
+                                    src="https://todevops.github.io/images/avatar.png" width="26" height="26">
+                            
+                            </a>
+                            <span class="author"><a
+                                    href="https://todevops.github.io/">JeremyTowne</a></span>
+                            <span class="path-divider">/</span>
+                            <strong itemprop="name" class="css-truncate-target" style="max-width: 410px"><a
+                                    href="https://todevops.github.io/posts/git/">Git 指南</a></strong>
+
+                            <div class="d-block text-small text-gray">
+                                Created <time-ago datetime="2019-05-26" class="no-wrap"
+                                    title="Created at 2019/05/26">
+                                    2019-05-26</time-ago>
+                                <span class="file-info-divider"></span>
+                                Modifyed <time-ago datetime="2019-05-26" class="no-wrap"
+                                    title="Modifyed  at 2019/05/26">
+                                    2019-05-26</time-ago>
+                            </div>
+                        </h1>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="container-lg clearfix new-discussion-timeline experiment-repo-nav  p-responsive">
+                <div class="repository-content ">
+                    <div class="Box mt-3 position-relative">
+                        <div class="Box-header py-2 d-flex flex-column flex-shrink-0 flex-md-row flex-md-items-center">
+                            <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                                1420 Words
+                                
+                            </div>
+                        </div>
+
+                        <div id="readme" class="Box-body readme blob instapaper_body js-code-block-container">
+                            <article class="markdown-body entry-content p-3 p-md-6" itemprop="text"><p>Git 概念以及常用命令</p>
+<h2 id="1-获取-git-仓库">1. 获取 Git 仓库</h2>
+<h3 id="在现有目录中初始化仓库">在现有目录中初始化仓库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git init
+</code></pre></div><h3 id="克隆现有的仓库">克隆现有的仓库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/libgit2/libgit2 mylibgit
+</code></pre></div><h2 id="2-记录每次更新到仓库">2. 记录每次更新到仓库</h2>
+<h3 id="检查当前文件状态">检查当前文件状态</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git status
+</code></pre></div><h3 id="跟踪新文件">跟踪新文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git add README
+git status
+</code></pre></div><h3 id="暂存已修改文件">暂存已修改文件</h3>
+<h3 id="状态简览">状态简览</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git status --short
+git status -s
+</code></pre></div><h3 id="忽略文件">忽略文件</h3>
+<p>使用 .gitignore 文件</p>
+<ul>
+<li>所有空行或者以 ＃ 开头的行都会被 Git 忽略。</li>
+<li>可以使用标准的 glob 模式匹配。</li>
+<li>匹配模式可以以（/）开头防止递归。</li>
+<li>匹配模式可以以（/）结尾指定目录。</li>
+<li>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。</li>
+</ul>
+<p>glob 模式</p>
+<ul>
+<li>星号（*）匹配零个或多个任意字符；</li>
+<li>[abc] 匹配任何一个列在方括号中的字符；</li>
+<li>问号（?）只匹配一个任意字符；</li>
+<li>如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配；</li>
+<li>使用两个星号（*) 表示匹配任意中间目录。</li>
+</ul>
+<h3 id="查看已暂存和未暂存的修改">查看已暂存和未暂存的修改</h3>
+<ul>
+<li>查看尚未暂存的文件更新了哪些部分</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git diff
+</code></pre></div><ul>
+<li>查看已暂存的将要添加到下次提交里的内容</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git diff --staged
+git diff --cached
+</code></pre></div><h3 id="提交更新">提交更新</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git commit -m <span style="color:#e6db74">&#34;first commit&#34;</span>
+</code></pre></div><h3 id="跳过使用暂存区域">跳过使用暂存区域</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git commit -a -m <span style="color:#e6db74">&#34;second commit&#34;</span>
+</code></pre></div><h3 id="移除文件">移除文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git rm <span style="color:#f92672">[</span>file_name<span style="color:#f92672">]</span>
+</code></pre></div><p>把文件从 Git 仓库中删除，文件保留在当前工作目录中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git rm --cached <span style="color:#f92672">[</span>file_name<span style="color:#f92672">]</span>
+</code></pre></div><h3 id="移动文件">移动文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git mv file_from file_to
+</code></pre></div><h2 id="3-查看提交历史">3. 查看提交历史</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git log
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git log -p -2 <span style="color:#75715e"># -p 显示每次提交的内容差异，-2 仅显示最近两次提交</span>
+git log --stat <span style="color:#75715e"># 查看提交的简略的统计信息</span>
+git log --oneline <span style="color:#75715e"># 将每个提交放在一行显示</span>
+git log --short
+git log --full
+git log --fuller
+git log --pretty<span style="color:#f92672">=</span>online
+git log --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#34;%h - %an, %ar : %s&#34;</span> --graph <span style="color:#75715e"># 定制要显示的记录格式</span>
+</code></pre></div><p><code>git log</code> 常用选项</p>
+<table>
+<thead>
+<tr>
+<th align="right">选项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">-p</td>
+<td align="left">按补丁格式显示每个更新之间的差异</td>
+</tr>
+<tr>
+<td align="right">&ndash;stat</td>
+<td align="left">显示每次更新的文件修改统计信息。</td>
+</tr>
+<tr>
+<td align="right">&ndash;shortstat</td>
+<td align="left">只显示 &ndash;stat 中最后的行数修改添加移除统计。</td>
+</tr>
+<tr>
+<td align="right">&ndash;name-only</td>
+<td align="left">仅在提交信息后显示已修改的文件清单。</td>
+</tr>
+<tr>
+<td align="right">&ndash;name-status</td>
+<td align="left">显示新增、修改、删除的文件清单。</td>
+</tr>
+<tr>
+<td align="right">&ndash;abbrev-commit</td>
+<td align="left">仅显示 SHA-1 的前几个字符，而非所有的 40 个字符。</td>
+</tr>
+<tr>
+<td align="right">&ndash;relative-date</td>
+<td align="left">使用较短的相对时间显示（比如，“2 weeks ago”）。</td>
+</tr>
+<tr>
+<td align="right">&ndash;graph</td>
+<td align="left">显示 ASCII 图形表示的分支合并历史。</td>
+</tr>
+<tr>
+<td align="right">&ndash;pretty</td>
+<td align="left">使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）。</td>
+</tr>
+</tbody>
+</table>
+<p><code>git log --pretty=format</code> 常用的选项</p>
+<table>
+<thead>
+<tr>
+<th align="right">选项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">%H</td>
+<td align="left">提交对象（commit）的完整哈希字串</td>
+</tr>
+<tr>
+<td align="right">%h</td>
+<td align="left">提交对象的简短哈希字串</td>
+</tr>
+<tr>
+<td align="right">%T</td>
+<td align="left">树对象（tree）的完整哈希字串</td>
+</tr>
+<tr>
+<td align="right">%t</td>
+<td align="left">树对象的简短哈希字串</td>
+</tr>
+<tr>
+<td align="right">%P</td>
+<td align="left">父对象（parent）的完整哈希字串</td>
+</tr>
+<tr>
+<td align="right">%p</td>
+<td align="left">父对象的简短哈希字串</td>
+</tr>
+<tr>
+<td align="right">%an</td>
+<td align="left">作者（author）的名字</td>
+</tr>
+<tr>
+<td align="right">%ae</td>
+<td align="left">作者的电子邮件地址</td>
+</tr>
+<tr>
+<td align="right">%ad</td>
+<td align="left">作者修订日期（可以用 &ndash;date= 选项定制格式）</td>
+</tr>
+<tr>
+<td align="right">%ar</td>
+<td align="left">作者修订日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td align="right">%cn</td>
+<td align="left">提交者（committer）的名字</td>
+</tr>
+<tr>
+<td align="right">%ce</td>
+<td align="left">提交者的电子邮件地址</td>
+</tr>
+<tr>
+<td align="right">%cd</td>
+<td align="left">提交日期</td>
+</tr>
+<tr>
+<td align="right">%cr</td>
+<td align="left">提交日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td align="right">%s</td>
+<td align="left">提交说明</td>
+</tr>
+</tbody>
+</table>
+<h3 id="限制输出长度">限制输出长度</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git log --since<span style="color:#f92672">=</span>2.weeks
+</code></pre></div><p>限制 <code>git log</code> 输出的选项</p>
+<table>
+<thead>
+<tr>
+<th align="right">选项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">-(n)</td>
+<td align="left">仅显示最近的 n 条提交</td>
+</tr>
+<tr>
+<td align="right">&ndash;since, &ndash;after</td>
+<td align="left">仅显示指定时间之后的提交</td>
+</tr>
+<tr>
+<td align="right">&ndash;until, &ndash;before</td>
+<td align="left">仅显示指定时间之前的提交</td>
+</tr>
+<tr>
+<td align="right">&ndash;author</td>
+<td align="left">仅显示指定作者相关的提交</td>
+</tr>
+<tr>
+<td align="right">&ndash;committer</td>
+<td align="left">仅显示指定提交者相关的提交</td>
+</tr>
+<tr>
+<td align="right">&ndash;grep</td>
+<td align="left">仅显示含指定关键字的提交</td>
+</tr>
+<tr>
+<td align="right">-S</td>
+<td align="left">仅显示添加或移除了某个关键字的提交</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-撤消操作">4. 撤消操作</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git commit --amend
+</code></pre></div><h3 id="取消暂存的文件">取消暂存的文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># git reset HEAD &lt;file&gt; ...</span>
+git reset HEAD CONTRIBUTING.md
+</code></pre></div><h3 id="撤消对文件的修改">撤消对文件的修改</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># git checkout -- &lt;file&gt;</span>
+git checkout -- CONTRIBUTING.md
+</code></pre></div><h2 id="5-远程仓库的使用">5. 远程仓库的使用</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/schacon/ticgit
+git remote
+git remote -v
+git remote add pb https://github.com/paulboone/ticgit
+git fetch pb
+</code></pre></div><h3 id="从远程仓库中抓取与拉取">从远程仓库中抓取与拉取</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git fetch <span style="color:#f92672">[</span>remote-name<span style="color:#f92672">]</span>
+</code></pre></div><h3 id="推送到远程仓库">推送到远程仓库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git push origin master
+</code></pre></div><h3 id="查看远程仓库">查看远程仓库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># git remote show [remote-name]</span>
+git remote show origin
+</code></pre></div><h3 id="远程仓库的移除与重命名">远程仓库的移除与重命名</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git remote rename pb paul
+git remote rm paul
+</code></pre></div><h2 id="6-打标签">6. 打标签</h2>
+<h3 id="列出标签">列出标签</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag
+git tag -l <span style="color:#e6db74">&#39;v1.8.5*&#39;</span>
+</code></pre></div><h3 id="创建标签">创建标签</h3>
+<h3 id="附注标签">附注标签</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag -a v1.4 -m <span style="color:#e6db74">&#39;my version 1.4&#39;</span>
+git tag
+git show v1.4 <span style="color:#75715e"># 查看标签信息与对应的提交信息</span>
+</code></pre></div><h3 id="轻量标签">轻量标签</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag v1.4-lw
+git tag
+</code></pre></div><h3 id="后期打标签">后期打标签</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git log --pretty<span style="color:#f92672">=</span>oneline
+git tag -a v1.2 &lt;部分校验和&gt; <span style="color:#75715e"># git tag -a v1.2 9fceb02</span>
+</code></pre></div><h3 id="共享标签">共享标签</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git push origin v1.5
+git push origin --tags <span style="color:#75715e"># 一次性推送全部标签</span>
+</code></pre></div><h3 id="检出标签">检出标签</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 使用 git checkout -b [branchname] [tagname] 在特定的标签上创建一个新分支</span>
+git checkout -b version2 v2.0.0
+</code></pre></div><h2 id="7-git-别名">7. Git 别名</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.unstage <span style="color:#e6db74">&#39;reset HEAD --&#39;</span>
+git config --global alias.last <span style="color:#e6db74">&#39;log -1 HEAD&#39;</span>
+<span style="color:#75715e"># 执行外部命令，在命令前面加入 ! 符号</span>
+git config --global alias.visual <span style="color:#e6db74">&#39;!gitk&#39;</span>
+</code></pre></div></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+  <div class="footer container-lg width-full p-responsive" role="contentinfo">
+    <div
+        class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+            <li class="mr-3 mr-lg-0">&copy;2019&nbsp;<b><a href="mailto: jeremytowne@163.com">JeremyTowne</a></b>
+            </li>
+        </ul>
+
+        <a aria-label="Homepage" title="ToDevOps" class="footer-octicon d-none d-lg-block mx-lg-4"
+            href="https://todevops.github.io/">
+            <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24"
+                aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+        </a>
+        <ul
+            class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+        </ul>
+    </div>
+    <div class="d-flex flex-justify-center pb-6">
+        <span class="f6 text-gray-light"></span>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+    type="application/javascript" src="https://todevops.github.io/js/frameworks.js"></script>
+
+<script crossorigin="anonymous" async="async"
+    type="application/javascript" src="https://todevops.github.io/js/github-bootstrap.js"></script>
+<script>
+    let classs = ['pinned-item-desc', 'text-gray', 'text-small', 'd-block', 'mt-2', 'mb-3'];
+    const pinned_posts = document.getElementsByName('pinned-post');
+    for (let i = 0; i < pinned_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = pinned_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+    classs = [ 'd-inline-block', 'text-gray', 'mb-2', 'pr-4'];
+    const posts_posts = document.getElementsByName('posts-post');
+    for (let i = 0; i < posts_posts.length; i++) {
+        for (let j = 0; j < classs.length; j++) {
+            const ps = posts_posts[i].getElementsByTagName('p');
+            for (let k = 0; k < ps.length; k++) {
+                ps[k].classList.add(classs[j]);
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zabbix on ToDevOps</title>
+    <link>https://todevops.github.io/tags/zabbix/</link>
+    <description>Recent content in zabbix on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 18 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/tags/zabbix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Zabbix Proxy 分布式监控</title>
+      <link>https://todevops.github.io/posts/zabbix_proxy/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_proxy/</guid>
+      <description>&lt;p&gt;使用 Zabbix Proxy 搭建分布式监控&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 安装指南</title>
+      <link>https://todevops.github.io/posts/zabbix_installation/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_installation/</guid>
+      <description>&lt;p&gt;Zabbix 3.4 安装指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 通过 jmx 监控 Tomcat</title>
+      <link>https://todevops.github.io/posts/zabbix_jmx/</link>
+      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_jmx/</guid>
+      <description>&lt;p&gt;Zabbix 通过 jmx 监控 Tomcat&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 通过 SNMP 进行监控</title>
+      <link>https://todevops.github.io/posts/zabbix_snmp/</link>
+      <pubDate>Thu, 15 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_snmp/</guid>
+      <description>&lt;p&gt;Zabbix 通过 SNMP 进行监控&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Zabbix 企业微信告警</title>
+      <link>https://todevops.github.io/posts/zabbix_wechat_alert/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/zabbix_wechat_alert/</guid>
+      <description>&lt;p&gt;使用 python 编写 Zabbix 企业微信告警脚本&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jenkins on ToDevOps</title>
+    <link>https://todevops.github.io/tags/jenkins/</link>
+    <description>Recent content in jenkins on ToDevOps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 20 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://todevops.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Jenkins 入门指南</title>
+      <link>https://todevops.github.io/posts/jenkins/</link>
+      <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins/</guid>
+      <description>&lt;p&gt;简单的介绍 Jenkins 的安装与使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins使用Maven构建Java应用程序</title>
+      <link>https://todevops.github.io/posts/jenkins_maven/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins_maven/</guid>
+      <description>&lt;p&gt;Jenkins使用Maven构建简单的Java应用程序&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins使用npm构建Node.js应用</title>
+      <link>https://todevops.github.io/posts/jenkins_npm/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins_npm/</guid>
+      <description>&lt;p&gt;Jenkins使用npm构建Node.js应用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jenkins使用PyInstaller构建Python应用</title>
+      <link>https://todevops.github.io/posts/jenkins_python/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://todevops.github.io/posts/jenkins_python/</guid>
+      <description>&lt;p&gt;Jenkins使用PyInstaller构建Python应用&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
